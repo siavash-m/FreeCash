@@ -3,1073 +3,978 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Freecash — Onboarding</title>
+<title>Freecash — World-Class Onboarding</title>
 <link rel="preconnect" href="https://fonts.bunny.net">
-<link href="https://fonts.bunny.net/css?family=poppins:400,500,600,700,800&display=swap" rel="stylesheet">
+<link href="https://fonts.bunny.net/css?family=poppins:400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.22.0/tabler-icons.min.css">
-
 <style>
-/* ============================================================
+/* ════════════════════════════════════════════════════════════
    DESIGN TOKENS
-   ============================================================ */
+════════════════════════════════════════════════════════════ */
 :root {
-  --bg: #141523;
-  --surface: #252539;
-  --elevated: #2F3043;
-  --border: #33334D;
-  --border-strong: #525266;
-  --green: #01D676;
-  --green-dim: rgba(1, 214, 118, 0.10);
-  --gold: #FFC700;
-  --gold-dim: rgba(255, 199, 0, 0.10);
-  --text: #FFFFFF;
-  --text-sec: #A9A9CA;
-  --text-muted: #7D7D9E;
-  --orange: #E87B2A;
-  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --bg:          #09091A;
+  --surface:     #121228;
+  --elevated:    #1A1A38;
+  --border:      rgba(255,255,255,0.07);
+  --border-hi:   rgba(255,255,255,0.14);
+  --glass:       rgba(255,255,255,0.04);
+
+  --purple:      #8B5CF6;
+  --purple-dk:   #6D28D9;
+  --purple-lt:   #A78BFA;
+  --purple-glow: rgba(139,92,246,0.40);
+  --purple-dim:  rgba(139,92,246,0.11);
+
+  --green:       #34D399;
+  --green-glow:  rgba(52,211,153,0.35);
+  --green-dim:   rgba(52,211,153,0.10);
+
+  --gold:        #FBBF24;
+  --gold-glow:   rgba(251,191,36,0.30);
+  --gold-dim:    rgba(251,191,36,0.10);
+
+  --pink:        #F472B6;
+  --blue:        #60A5FA;
+  --orange:      #FB923C;
+  --red:         #F87171;
+
+  --text:        #FFFFFF;
+  --text-sec:    #94A3B8;
+  --text-muted:  #64748B;
+
+  --spring:      cubic-bezier(0.34,1.56,0.64,1);
+  --ease-out:    cubic-bezier(0.22,1,0.36,1);
 }
 
-/* ============================================================
-   BASE RESET
-   ============================================================ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body {
-  height: 100%;
-  font-family: 'Poppins', sans-serif;
-  background: #0A0B14;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 24px 0 40px;
+/* ════════════════════════════════════════════════════════════
+   RESET
+════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  height:100%;
+  font-family:'Poppins',-apple-system,sans-serif;
+  background:#040410;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
 }
 
-/* ============================================================
+/* ════════════════════════════════════════════════════════════
    PHONE FRAME
-   ============================================================ */
-.phone-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.phone {
-  width: 390px;
-  height: 844px;
-  background: var(--bg);
-  border: 2px solid #2A2A3E;
-  border-radius: 50px;
+════════════════════════════════════════════════════════════ */
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:20px;}
+.phone{
+  width:390px;height:844px;
+  background:var(--bg);
+  border:2px solid rgba(139,92,246,0.22);
+  border-radius:52px;
   box-shadow:
-    0 0 0 8px #0E0F1A,
-    0 0 0 10px #1A1B2E,
-    0 40px 80px rgba(0,0,0,0.6);
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Notch */
-.phone-notch {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 130px;
-  height: 32px;
-  background: #0A0B14;
-  border-radius: 0 0 20px 20px;
-  z-index: 100;
-}
-
-/* Status bar */
-.status-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 24px 0;
-  height: 44px;
-  position: relative;
-  z-index: 99;
-  flex-shrink: 0;
-}
-
-.status-time {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.02em;
-}
-
-.status-icons {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--text);
-}
-
-.status-icons i {
-  font-size: 15px;
-}
-
-/* Screen container */
-.screens {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-}
-
-/* ============================================================
-   SCREEN BASE STYLES
-   ============================================================ */
-.screen {
-  position: absolute;
-  inset: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  opacity: 0;
-  transform: translateX(100%);
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  scrollbar-width: none;
-}
-.screen::-webkit-scrollbar { display: none; }
-
-.screen.active {
-  opacity: 1;
-  transform: translateX(0%);
-  pointer-events: all;
-}
-
-.screen.exit-left {
-  opacity: 0;
-  transform: translateX(-30px);
-  pointer-events: none;
-}
-
-/* ============================================================
-   SCREEN 1 STYLES — VALUE HOOK
-   ============================================================ */
-#screen1 {
-  padding: 0 24px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Logo */
-.s1-logo {
-  padding-top: 16px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.logo-icon {
-  width: 38px;
-  height: 38px;
-  background: var(--green-dim);
-  border: 1.5px solid var(--green);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--green);
-  font-size: 20px;
-}
-
-.logo-text {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.02em;
-}
-
-.logo-text span {
-  color: var(--green);
-}
-
-/* Earning Loop */
-.earning-loop {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.loop-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.loop-step-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  color: var(--text-muted);
-  transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
-}
-
-.loop-step-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  transition: color 0.4s ease;
-}
-
-.loop-step.active-green .loop-step-icon {
-  background: var(--green-dim);
-  border-color: var(--green);
-  color: var(--green);
-}
-.loop-step.active-green .loop-step-label { color: var(--green); }
-
-.loop-step.active-gold .loop-step-icon {
-  background: var(--gold-dim);
-  border-color: var(--gold);
-  color: var(--gold);
-}
-.loop-step.active-gold .loop-step-label { color: var(--gold); }
-
-.loop-arrow {
-  color: var(--border-strong);
-  font-size: 18px;
-  margin-top: -20px;
-}
-
-/* Social proof card */
-.social-proof {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 22px;
-  padding: 20px;
-  text-align: center;
-}
-
-.social-proof-number {
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--green);
-  line-height: 1.1;
-  font-variant-numeric: tabular-nums;
-}
-
-.social-proof-label {
-  font-size: 13px;
-  color: var(--text-sec);
-  margin-top: 4px;
-}
-
-/* Live ticker */
-.live-ticker {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 22px;
-  padding: 14px 16px;
-  min-height: 50px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.ticker-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green);
-  flex-shrink: 0;
-  animation: pulse-dot 2s infinite ease-in-out;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(0.8); opacity: 0.5; }
-}
-
-.ticker-content {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  transition: opacity 0.3s ease;
-}
-
-.ticker-content.fade { opacity: 0; }
-
-.ticker-text {
-  font-size: 12px;
-  color: var(--text-sec);
-  flex: 1;
-}
-
-.ticker-text strong {
-  font-weight: 600;
-  color: var(--text);
-}
-
-.ticker-amount {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--green);
-  white-space: nowrap;
-}
-
-/* CTA Button */
-.cta-btn {
-  background: var(--green);
-  color: #0A1A0F;
-  font-family: 'Poppins', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  border: none;
-  border-radius: 13px;
-  padding: 16px 20px;
-  width: 100%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-.cta-btn:active { transform: scale(0.97); opacity: 0.9; }
-
-.cta-btn i { font-size: 18px; }
-
-/* Subtext */
-.s1-subtext {
-  font-size: 12px;
-  color: var(--text-sec);
-  text-align: center;
-  line-height: 1.5;
-}
-
-.s1-subtext strong {
-  font-weight: 700;
-  color: var(--gold);
-}
-
-/* ============================================================
-   SCREEN 2 STYLES — PROFILE BUILDER
-   ============================================================ */
-#screen2 {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* Screen 2 Header */
-.s2-header {
-  padding: 52px 20px 0;
-  flex-shrink: 0;
-}
-
-.s2-header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.s2-avatar-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.s2-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--surface);
-  border: 2px solid var(--green);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--green);
-  font-size: 16px;
-}
-
-.streak-pill {
-  background: rgba(232, 123, 42, 0.12);
-  border: 1px solid rgba(232, 123, 42, 0.3);
-  border-radius: 20px;
-  padding: 4px 10px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--orange);
-}
-
-.streak-pill i { font-size: 14px; }
-
-.balance-pill {
-  background: var(--green-dim);
-  border: 1px solid rgba(1, 214, 118, 0.3);
-  border-radius: 20px;
-  padding: 6px 14px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--green);
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-  font-variant-numeric: tabular-nums;
-}
-
-.balance-pill.flash-gold {
-  background: rgba(255, 199, 0, 0.15);
-  border-color: rgba(255, 199, 0, 0.4);
-  color: var(--gold);
-}
-
-.s2-profile-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-top: 4px;
-}
-
-/* Progress Section */
-.progress-section {
-  padding: 20px 20px 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
-}
-
-.progress-ring-wrap {
-  position: relative;
-  width: 120px;
-  height: 120px;
-}
-
-.progress-ring-svg {
-  width: 120px;
-  height: 120px;
-  transform: rotate(-90deg);
-}
-
-.progress-ring-bg {
-  fill: none;
-  stroke: var(--surface);
-  stroke-width: 8;
-}
-
-.progress-ring-fill {
-  fill: none;
-  stroke: var(--green);
-  stroke-width: 8;
-  stroke-linecap: round;
-  stroke-dasharray: 326.73;
-  stroke-dashoffset: 326.73;
-  transition: stroke-dashoffset 0.6s ease-out;
-}
-
-.progress-ring-center {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-}
-
-.progress-pct {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text);
-  font-variant-numeric: tabular-nums;
-}
-
-.progress-complete-label {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.earning-potential-row {
-  width: 100%;
-  max-width: 310px;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 16px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.ep-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.ep-value {
-  display: flex;
-  align-items: baseline;
-  gap: 2px;
-}
-
-.ep-number {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--gold);
-  font-variant-numeric: tabular-nums;
-}
-
-.ep-suffix {
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-/* Card Stack */
-.card-stack {
-  position: relative;
-  flex: 1;
-  min-height: 350px;
-}
-
-.q-card {
-  position: absolute;
-  width: calc(100% - 40px);
-  left: 20px;
-  top: 20px;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 22px;
-  padding: 20px;
-  transition: transform 0.35s var(--spring), opacity 0.35s var(--spring);
-}
-
-.q-card[data-depth="0"] {
-  z-index: 3;
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-
-.q-card[data-depth="1"] {
-  z-index: 2;
-  transform: translateY(10px) scale(0.97);
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.q-card[data-depth="2"] {
-  z-index: 1;
-  transform: translateY(20px) scale(0.94);
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-.q-card.exiting {
-  transform: translateY(-60px) scale(0.92) !important;
-  opacity: 0 !important;
-  transition: transform 0.3s cubic-bezier(0.36, 0, 0.66, -0.56), opacity 0.3s cubic-bezier(0.36, 0, 0.66, -0.56) !important;
-  pointer-events: none !important;
-  z-index: 4 !important;
-}
-
-.q-card-meta {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-
-.q-card-question {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-
-.q-card-hint {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-.q-options {
-  display: grid;
-  gap: 10px;
-}
-
-.q-option {
-  background: var(--elevated);
-  border: 1.5px solid var(--border);
-  border-radius: 13px;
-  padding: 12px 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.q-option:active { transform: scale(0.95); }
-
-.q-option i {
-  font-size: 22px;
-  color: var(--text-sec);
-  transition: color 0.2s ease;
-}
-
-.q-option span {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-sec);
-  text-align: center;
-  transition: color 0.2s ease;
-  line-height: 1.2;
-}
-
-.q-option.selected {
-  background: var(--green-dim);
-  border-color: var(--green);
-}
-
-.q-option.selected i,
-.q-option.selected span {
-  color: var(--green);
-}
-
-.q-card-reward {
-  border-top: 1px solid var(--border);
-  margin-top: 14px;
-  padding-top: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.q-card-reward i {
-  font-size: 14px;
-  color: var(--gold);
-}
-
-.q-card-reward span {
-  font-size: 11px;
-  color: var(--text-muted);
-}
-
-.q-card-reward strong {
-  font-weight: 700;
-  color: var(--gold);
-}
-
-/* ============================================================
-   SCREEN 3 STYLES — PROFILE COMPLETE
-   ============================================================ */
-#screen3 {
-  display: flex;
-  flex-direction: column;
-  padding: 0 24px 40px;
-  position: relative;
-}
-
-.s3-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 300px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.s3-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  padding-top: 24px;
-}
-
-/* Complete ring */
-.s3-ring-wrap {
-  position: relative;
-  width: 120px;
-  height: 120px;
-}
-
-.s3-ring-svg {
-  width: 120px;
-  height: 120px;
-  transform: rotate(-90deg);
-}
-
-.s3-ring-bg {
-  fill: none;
-  stroke: var(--surface);
-  stroke-width: 8;
-}
-
-.s3-ring-fill {
-  fill: none;
-  stroke: var(--green);
-  stroke-width: 8;
-  stroke-linecap: round;
-  stroke-dasharray: 326.73;
-  stroke-dashoffset: 326.73;
-  transition: stroke-dashoffset 1s ease-out;
-}
-
-.s3-ring-center {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.s3-ring-center i {
-  font-size: 32px;
-  color: var(--green);
-}
-
-.s3-headline {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text);
-  text-align: center;
-  line-height: 1.25;
-  white-space: pre-line;
-}
-
-.s3-subheadline {
-  font-size: 13px;
-  color: var(--text-sec);
-  text-align: center;
-  margin-top: -8px;
-}
-
-/* Stats row */
-.s3-stats {
-  display: flex;
-  gap: 8px;
-  width: 100%;
-}
-
-.s3-stat {
-  flex: 1;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 16px;
-  padding: 14px 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.s3-stat-value {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.s3-stat-value.green { color: var(--green); }
-.s3-stat-value.gold { color: var(--gold); }
-
-.s3-stat-value i {
-  font-size: 22px;
-}
-
-.s3-stat-label {
-  font-size: 10px;
-  color: var(--text-muted);
-  text-align: center;
-  line-height: 1.3;
-}
-
-/* Cashout chip */
-.cashout-chip {
-  width: 100%;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 14px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.cashout-chip-icon {
-  width: 38px;
-  height: 38px;
-  background: var(--elevated);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: var(--text-sec);
-  flex-shrink: 0;
-}
-
-.cashout-chip-info {
-  flex: 1;
-}
-
-.cashout-chip-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.cashout-chip-method {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.cashout-configured {
-  font-size: 11px;
-  color: var(--green);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* First offer section */
-.s3-section-label {
-  width: 100%;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.offer-card {
-  width: 100%;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 22px;
-  padding: 16px;
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
-
-.offer-icon {
-  width: 56px;
-  height: 56px;
-  background: rgba(232, 123, 42, 0.12);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  color: var(--orange);
-  flex-shrink: 0;
-}
-
-.offer-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.offer-name {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-
-.offer-desc {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-
-.offer-badges {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.badge {
-  border-radius: 6px;
-  padding: 3px 8px;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-.badge-easy {
-  background: var(--green-dim);
-  color: var(--green);
-}
-
-.badge-time {
-  background: var(--elevated);
-  color: var(--text-muted);
-}
-
-.offer-reward {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  flex-shrink: 0;
-}
-
-.offer-amount {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--gold);
-}
-
-.offer-reward-label {
-  font-size: 10px;
-  color: var(--text-muted);
-}
-
-/* Balance earned chip */
-.balance-earned-chip {
-  width: 100%;
-  background: var(--green-dim);
-  border: 1px solid rgba(1, 214, 118, 0.25);
-  border-radius: 12px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.bec-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.bec-amount {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--green);
-}
-
-/* Screen 3 CTAs */
-.s3-cta-primary {
-  width: 100%;
-  background: var(--green);
-  color: #0A1A0F;
-  font-family: 'Poppins', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  border: none;
-  border-radius: 13px;
-  padding: 16px 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-.s3-cta-primary:active { transform: scale(0.97); opacity: 0.9; }
-.s3-cta-primary i { font-size: 18px; }
-
-.s3-cta-secondary {
-  width: 100%;
-  background: transparent;
-  color: var(--text-sec);
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  border: 1.5px solid var(--border);
-  border-radius: 13px;
-  padding: 14px 20px;
-  cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-.s3-cta-secondary:active { transform: scale(0.97); opacity: 0.8; }
-
-/* ============================================================
-   ANIMATIONS
-   ============================================================ */
-@keyframes fadeSlotIn {
-  0% { opacity: 0; transform: translateY(-4px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* ============================================================
-   RESTART BUTTON
-   ============================================================ */
-.restart-btn {
-  background: transparent;
-  color: var(--text-muted);
-  font-family: 'Poppins', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.restart-btn:hover { color: var(--text-sec); border-color: var(--border-strong); }
-.restart-btn i { font-size: 16px; }
-
-/* ============================================================
-   REDUCED MOTION
-   ============================================================ */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    0 0 0 8px #08081A,
+    0 0 0 10px rgba(139,92,246,0.08),
+    0 50px 100px rgba(0,0,0,0.85),
+    0 0 70px rgba(139,92,246,0.12);
+  overflow:hidden;
+  position:relative;
+  display:flex;flex-direction:column;
+}
+.notch{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:130px;height:34px;background:#040410;
+  border-radius:0 0 22px 22px;z-index:200;
+}
+.status-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px 0;height:48px;
+  position:relative;z-index:99;flex-shrink:0;
+}
+.status-time{font-size:14px;font-weight:700;color:var(--text);letter-spacing:.02em;}
+.status-icons{display:flex;align-items:center;gap:5px;color:var(--text);font-size:15px;}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN SYSTEM
+════════════════════════════════════════════════════════════ */
+.screens{flex:1;position:relative;overflow:hidden;}
+.screen{
+  position:absolute;inset:0;
+  overflow-y:auto;overflow-x:hidden;
+  opacity:0;transform:translateX(100%);
+  pointer-events:none;
+  transition:opacity .42s var(--ease-out),transform .42s var(--ease-out);
+  scrollbar-width:none;
+}
+.screen::-webkit-scrollbar{display:none;}
+.screen.active{opacity:1;transform:translateX(0);pointer-events:all;}
+.screen.exit-left{opacity:0;transform:translateX(-36px);pointer-events:none;}
+
+/* ════════════════════════════════════════════════════════════
+   SHARED COMPONENTS
+════════════════════════════════════════════════════════════ */
+.btn-primary{
+  width:100%;
+  background:linear-gradient(135deg,var(--purple-dk),var(--purple),var(--purple-lt));
+  color:#fff;font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;
+  border:none;border-radius:16px;padding:17px 24px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  position:relative;overflow:hidden;
+  box-shadow:0 8px 32px var(--purple-glow);
+  transition:transform .15s ease,box-shadow .2s ease;
+  letter-spacing:.01em;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 55%);
+  pointer-events:none;
+}
+.btn-primary:active{transform:scale(.97);box-shadow:0 4px 16px var(--purple-glow);}
+.btn-primary i{font-size:20px;}
+
+.btn-secondary{
+  width:100%;background:transparent;color:var(--text-sec);
+  font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;
+  border:1.5px solid var(--border-hi);border-radius:16px;
+  padding:15px 24px;cursor:pointer;
+  transition:transform .15s ease,border-color .2s ease,color .2s ease;
+}
+.btn-secondary:active{transform:scale(.97);}
+
+.screen-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px 0;flex-shrink:0;
+}
+.back-btn{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--glass);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .2s ease;
+  color:var(--text-sec);font-size:18px;
+}
+.back-btn:active{background:rgba(255,255,255,.08);}
+.step-pill{
+  font-size:11px;font-weight:700;letter-spacing:.08em;
+  color:var(--text-muted);text-transform:uppercase;
+}
+.spacer{width:36px;}
+
+.section-lbl{
+  font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text-muted);
+}
+
+/* ════════════════════════════════════════════════════════════
+   KEYFRAMES
+════════════════════════════════════════════════════════════ */
+@keyframes breathe{
+  0%,100%{opacity:.6;transform:translateX(-50%) scale(1);}
+  50%{opacity:1;transform:translateX(-50%) scale(1.12);}
+}
+@keyframes breatheC{
+  0%,100%{opacity:.6;transform:scale(1);}
+  50%{opacity:1;transform:scale(1.12);}
+}
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-9px);}
+}
+@keyframes livePulse{
+  0%,100%{box-shadow:0 0 8px var(--green-glow);transform:scale(1);}
+  50%{box-shadow:0 0 18px var(--green-glow),0 0 28px rgba(52,211,153,.18);transform:scale(1.25);}
+}
+@keyframes slideInR{
+  from{opacity:0;transform:translateX(24px);}
+  to{opacity:1;transform:translateX(0);}
+}
+@keyframes slideInUp{
+  from{opacity:0;transform:translateY(18px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes scaleIn{
+  from{opacity:0;transform:scale(.82);}
+  to{opacity:1;transform:scale(1);}
+}
+@keyframes ringPulse{
+  0%,100%{transform:scale(1);opacity:.5;}
+  50%{transform:scale(1.1);opacity:1;}
+}
+@keyframes coinBounce{
+  0%{transform:scale(0) rotate(-25deg);opacity:0;}
+  70%{transform:scale(1.1) rotate(5deg);opacity:1;}
+  100%{transform:scale(1) rotate(0deg);opacity:1;}
+}
+@keyframes shimmer{
+  0%{background-position:-400px 0;}
+  100%{background-position:400px 0;}
+}
+@keyframes countUp{
+  0%{transform:translateY(6px);opacity:0;}
+  100%{transform:translateY(0);opacity:1;}
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 1 — SPLASH
+════════════════════════════════════════════════════════════ */
+#s1{
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;overflow:hidden;
+}
+.s1-glow1{
+  position:absolute;width:520px;height:420px;top:-120px;
+  left:50%;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(139,92,246,.3) 0%,transparent 68%);
+  pointer-events:none;z-index:0;
+  animation:breathe 4.5s ease-in-out infinite;
+}
+.s1-glow2{
+  position:absolute;width:340px;height:260px;bottom:60px;
+  left:50%;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(52,211,153,.13) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+  animation:breathe 4.5s ease-in-out infinite 2.2s;
+}
+#s1Canvas{position:absolute;inset:0;pointer-events:none;z-index:1;}
+.s1-inner{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;
+  width:100%;padding:0 28px 36px;flex:1;
+}
+.s1-logo-wrap{
+  margin-top:18px;margin-bottom:20px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.s1-logo-icon{
+  width:82px;height:82px;
+  background:linear-gradient(145deg,#5B21B6,#8B5CF6,#A78BFA);
+  border-radius:26px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:38px;color:#fff;
+  box-shadow:0 0 48px var(--purple-glow),0 0 90px rgba(139,92,246,.18);
+  animation:logoFloat 3.2s ease-in-out infinite;
+  position:relative;
+}
+.s1-logo-icon::after{
+  content:'';position:absolute;inset:-2px;border-radius:28px;
+  border:2px solid rgba(167,139,250,.45);
+}
+.s1-logo-text{
+  font-size:30px;font-weight:900;color:var(--text);
+  letter-spacing:-.035em;
+}
+.s1-logo-text span{color:var(--purple-lt);}
+.s1-tagline{
+  font-size:22px;font-weight:800;color:var(--text);
+  text-align:center;line-height:1.28;letter-spacing:-.02em;
+  margin-bottom:6px;
+}
+.s1-tagline .grad{
+  background:linear-gradient(90deg,var(--green),var(--purple-lt));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.s1-counter-card{
+  width:100%;
+  background:rgba(139,92,246,.08);
+  border:1px solid rgba(139,92,246,.24);
+  border-radius:20px;padding:18px;text-align:center;
+  margin:18px 0 16px;position:relative;overflow:hidden;
+}
+.s1-counter-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--purple),transparent);
+}
+.s1-live-row{
+  display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:5px;
+}
+.live-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green-glow);
+  animation:livePulse 2s ease-in-out infinite;
+}
+.live-lbl{
+  font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--green);
+}
+.s1-counter-num{
+  font-size:40px;font-weight:900;color:var(--text);
+  letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;
+}
+.s1-counter-sub{font-size:12px;color:var(--text-muted);margin-top:4px;}
+.s1-avatars{
+  display:flex;align-items:center;gap:12px;margin-bottom:22px;
+}
+.avatar-stack{display:flex;}
+.av{
+  width:32px;height:32px;border-radius:50%;
+  border:2px solid var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;margin-left:-9px;overflow:hidden;
+}
+.av:first-child{margin-left:0;}
+.av-a{background:linear-gradient(135deg,#5B21B6,#A78BFA);}
+.av-b{background:linear-gradient(135deg,#065F46,#34D399);}
+.av-c{background:linear-gradient(135deg,#92400E,#FBBF24);}
+.av-d{background:linear-gradient(135deg,#7C2D12,#FB923C);}
+.av-txt{font-size:12px;color:var(--text-sec);line-height:1.4;}
+.av-txt strong{font-weight:700;color:var(--text);display:block;}
+.s1-cta-wrap{width:100%;margin-top:auto;display:flex;flex-direction:column;gap:14px;}
+.s1-trust{display:flex;align-items:center;justify-content:center;gap:18px;}
+.s1-trust-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);}
+.s1-trust-item i{font-size:13px;color:var(--green);}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 2 — TRUST & SOCIAL PROOF
+════════════════════════════════════════════════════════════ */
+#s2{display:flex;flex-direction:column;padding:0 22px 32px;position:relative;}
+.s2-glow{
+  position:absolute;width:380px;height:280px;top:-60px;left:50%;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(52,211,153,.1) 0%,transparent 70%);
+  pointer-events:none;z-index:0;animation:breathe 5s ease-in-out infinite;
+}
+.s2-inner{position:relative;z-index:1;display:flex;flex-direction:column;gap:14px;}
+.s2-title{
+  font-size:26px;font-weight:900;color:var(--text);
+  line-height:1.2;letter-spacing:-.025em;margin-top:10px;
+}
+.s2-title span{
+  background:linear-gradient(90deg,var(--green),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.s2-payout-hero{
+  background:linear-gradient(135deg,rgba(52,211,153,.1),rgba(52,211,153,.03));
+  border:1px solid rgba(52,211,153,.2);border-radius:20px;
+  padding:20px;text-align:center;position:relative;overflow:hidden;
+}
+.s2-payout-hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--green),transparent);
+}
+.s2-today-lbl{
+  font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--green);margin-bottom:5px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.s2-payout-num{
+  font-size:44px;font-weight:900;color:var(--text);
+  letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums;
+}
+.s2-payout-sub{font-size:12px;color:var(--text-sec);margin-top:4px;}
+/* Live feed */
+.s2-feed{display:flex;flex-direction:column;gap:8px;}
+.s2-feed-item{
+  display:flex;align-items:center;gap:11px;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:14px;padding:10px 14px;
+  animation:slideInR .4s var(--ease-out) both;
+}
+.s2-feed-item:nth-child(2){animation-delay:.08s;}
+.s2-feed-item:nth-child(3){animation-delay:.16s;}
+.s2-feed-av{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.s2-feed-av-a{background:linear-gradient(135deg,#5B21B6,#A78BFA);}
+.s2-feed-av-b{background:linear-gradient(135deg,#065F46,#34D399);}
+.s2-feed-av-c{background:linear-gradient(135deg,#1E3A5F,#60A5FA);}
+.s2-feed-info{flex:1;min-width:0;}
+.s2-feed-name{font-size:13px;font-weight:700;color:var(--text);}
+.s2-feed-action{font-size:11px;color:var(--text-muted);}
+.s2-feed-amt{font-size:15px;font-weight:800;color:var(--green);flex-shrink:0;}
+/* Rating */
+.s2-rating{display:flex;align-items:center;gap:10px;}
+.s2-stars{display:flex;gap:2px;}
+.s2-stars i{font-size:15px;color:var(--gold);}
+.s2-stars i.dim{color:var(--text-muted);}
+.s2-rat-txt{font-size:13px;color:var(--text-sec);}
+.s2-rat-txt strong{color:var(--text);font-weight:700;}
+/* Badges */
+.s2-badges{display:flex;gap:8px;}
+.s2-badge{
+  flex:1;display:flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:12px;padding:10px 12px;
+}
+.s2-badge i{font-size:18px;color:var(--green);}
+.s2-badge-txt{font-size:10px;font-weight:600;color:var(--text-sec);line-height:1.3;}
+/* Testimonial */
+.s2-testi{
+  background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.14);
+  border-radius:16px;padding:14px 16px;
+}
+.s2-quote{
+  font-size:13px;color:var(--text-sec);line-height:1.6;
+  font-style:italic;margin-bottom:10px;
+}
+.s2-quote-author{display:flex;align-items:center;gap:9px;}
+.s2-q-av{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,var(--purple-dk),var(--purple-lt));
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:#fff;font-weight:700;flex-shrink:0;
+}
+.s2-q-name{font-size:12px;font-weight:700;color:var(--text);}
+.s2-q-country{font-size:11px;color:var(--text-muted);}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 3 — PERSONALIZATION
+════════════════════════════════════════════════════════════ */
+#s3{display:flex;flex-direction:column;padding:0 22px 36px;}
+.s3-title{
+  font-size:24px;font-weight:900;color:var(--text);
+  letter-spacing:-.025em;margin-top:10px;margin-bottom:6px;
+}
+.s3-sub{font-size:13px;color:var(--text-sec);margin-bottom:20px;line-height:1.5;}
+.s3-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;
+}
+.s3-card{
+  background:rgba(255,255,255,.04);border:1.5px solid var(--border);
+  border-radius:18px;padding:18px 8px 14px;
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  position:relative;overflow:hidden;
+  transition:background .2s,border-color .2s,transform .15s var(--spring),box-shadow .2s;
+}
+.s3-card:active{transform:scale(.94);}
+.s3-card.sel{
+  border-color:var(--purple);background:var(--purple-dim);
+  box-shadow:0 0 22px var(--purple-glow),inset 0 0 20px rgba(139,92,246,.06);
+  transform:scale(1.04);
+}
+.s3-card-icon{font-size:30px;line-height:1;}
+.s3-card-lbl{
+  font-size:11px;font-weight:700;color:var(--text-sec);
+  text-align:center;transition:color .2s;
+}
+.s3-card.sel .s3-card-lbl{color:var(--purple-lt);}
+.s3-check{
+  position:absolute;top:8px;right:8px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--purple);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:#fff;
+  opacity:0;transform:scale(0);
+  transition:opacity .2s,transform .25s var(--spring);
+}
+.s3-card.sel .s3-check{opacity:1;transform:scale(1);}
+.s3-note{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.14);
+  border-radius:12px;padding:10px 14px;margin-bottom:18px;
+}
+.s3-note i{color:var(--gold);font-size:16px;flex-shrink:0;}
+.s3-note span{font-size:12px;color:var(--text-sec);}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 4 — FIRST GOAL
+════════════════════════════════════════════════════════════ */
+#s4{display:flex;flex-direction:column;padding:0 22px 36px;align-items:center;}
+.s4-ring-wrap{
+  position:relative;width:170px;height:170px;
+  margin:18px 0 16px;
+}
+.s4-ring-svg{
+  width:170px;height:170px;transform:rotate(-90deg);
+  filter:drop-shadow(0 0 14px rgba(139,92,246,.5));
+}
+.s4-ring-bg{fill:none;stroke:rgba(255,255,255,.06);stroke-width:10;}
+.s4-ring-fill{
+  fill:none;stroke:url(#ringGrad);stroke-width:10;stroke-linecap:round;
+  stroke-dasharray:439.82;stroke-dashoffset:439.82;
+  transition:stroke-dashoffset 1.4s var(--ease-out);
+}
+.s4-ring-center{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+}
+.s4-ring-amt{
+  font-size:32px;font-weight:900;color:var(--text);
+  letter-spacing:-.035em;line-height:1;
+}
+.s4-ring-lbl{
+  font-size:10px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text-muted);
+}
+.s4-headline{
+  font-size:22px;font-weight:900;color:var(--text);
+  text-align:center;letter-spacing:-.025em;margin-bottom:6px;
+}
+.s4-sub{
+  font-size:13px;color:var(--text-sec);text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  margin-bottom:22px;
+}
+.s4-sub i{color:var(--green);font-size:15px;}
+.s4-milestones{width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:22px;}
+.s4-ms{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:16px;padding:14px 16px;
+  transition:border-color .3s,background .3s;
+}
+.s4-ms.active{border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.06);}
+.s4-ms.done{border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.06);}
+.s4-ms-ico{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+.s4-ms.active .s4-ms-ico{background:var(--purple-dim);color:var(--purple-lt);}
+.s4-ms.done .s4-ms-ico{background:var(--green-dim);color:var(--green);}
+.s4-ms:not(.active):not(.done) .s4-ms-ico{background:rgba(255,255,255,.04);color:var(--text-muted);}
+.s4-ms-info{flex:1;}
+.s4-ms-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.s4-ms-sub{font-size:11px;color:var(--text-muted);}
+.s4-ms-rew{font-size:16px;font-weight:900;color:var(--green);flex-shrink:0;}
+.s4-ms:not(.active):not(.done) .s4-ms-rew{color:var(--text-muted);}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 5 — QUICK WIN OFFERS
+════════════════════════════════════════════════════════════ */
+#s5{display:flex;flex-direction:column;padding:0 22px 36px;}
+.s5-bal{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.18);
+  border-radius:18px;padding:14px 18px;margin-top:10px;margin-bottom:14px;
+}
+.s5-bal-left{display:flex;flex-direction:column;gap:1px;}
+.s5-bal-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);}
+.s5-bal-num{font-size:24px;font-weight:900;color:var(--text);letter-spacing:-.025em;}
+.s5-cashout-hint{font-size:11px;color:var(--text-sec);text-align:right;max-width:120px;line-height:1.4;}
+.s5-cashout-hint strong{color:var(--green);font-weight:700;}
+.s5-progress-wrap{width:100%;margin-bottom:18px;}
+.s5-prog-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.s5-prog-lbl{font-size:11px;font-weight:600;color:var(--text-muted);}
+.s5-prog-pct{font-size:11px;font-weight:700;color:var(--purple-lt);}
+.s5-prog-bar-outer{
+  width:100%;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;
+}
+.s5-prog-bar-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--purple-dk),var(--purple-lt));
+  width:10%;transition:width 1s var(--ease-out);
+  box-shadow:0 0 8px var(--purple-glow);
+}
+.s5-offers{display:flex;flex-direction:column;gap:12px;margin-bottom:18px;}
+.s5-offer{
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:20px;padding:16px;
+  display:flex;flex-direction:column;gap:12px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,transform .15s;
+}
+.s5-offer:first-child{border-color:rgba(139,92,246,.28);}
+.s5-offer:first-child::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--purple-dk),var(--purple-lt));
+}
+.s5-offer-top{display:flex;align-items:flex-start;gap:12px;}
+.s5-thumb{
+  width:62px;height:62px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:30px;
+}
+.s5-th-a{background:linear-gradient(135deg,#1E0A3C,#5B21B6);}
+.s5-th-b{background:linear-gradient(135deg,#0A2A1E,#065F46);}
+.s5-th-c{background:linear-gradient(135deg,#3C200A,#92400E);}
+.s5-offer-info{flex:1;min-width:0;}
+.s5-offer-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:5px;}
+.s5-tag{
+  border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;
+}
+.s5-tag-hot{background:rgba(244,114,182,.12);color:var(--pink);}
+.s5-tag-fast{background:var(--green-dim);color:var(--green);}
+.s5-tag-easy{background:var(--purple-dim);color:var(--purple-lt);}
+.s5-offer-name{font-size:14px;font-weight:800;color:var(--text);margin-bottom:2px;}
+.s5-offer-task{font-size:11px;color:var(--text-muted);}
+.s5-offer-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+.s5-offer-amt{font-size:22px;font-weight:900;color:var(--gold);letter-spacing:-.025em;}
+.s5-offer-time{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text-muted);}
+.s5-offer-time i{font-size:12px;}
+.s5-prog-row{display:flex;flex-direction:column;gap:4px;}
+.s5-prog-bar-s{width:100%;height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;}
+.s5-prog-fill-s{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--purple-dk),var(--purple-lt));}
+.s5-prog-lbls{display:flex;justify-content:space-between;}
+.s5-prog-txt{font-size:10px;color:var(--text-muted);}
+.s5-play{
+  background:linear-gradient(135deg,var(--purple-dk),var(--purple));
+  color:#fff;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;
+  border:none;border-radius:12px;padding:12px;width:100%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  box-shadow:0 4px 18px var(--purple-glow);
+  transition:transform .15s ease;
+}
+.s5-play:active{transform:scale(.97);}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 6 — CELEBRATION
+════════════════════════════════════════════════════════════ */
+#s6{
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 22px 40px;position:relative;overflow:hidden;
+}
+#s6Canvas{position:absolute;inset:0;pointer-events:none;z-index:0;}
+.s6-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;}
+.s6-glow-ring{
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(52,211,153,.28) 0%,rgba(52,211,153,.08) 45%,transparent 70%);
+  display:flex;align-items:center;justify-content:center;
+  margin:20px 0 12px;position:relative;
+}
+.s6-glow-ring::before{
+  content:'';position:absolute;inset:18px;border-radius:50%;
+  border:2px solid rgba(52,211,153,.4);
+  animation:ringPulse 2s ease-in-out infinite;
+}
+.s6-glow-ring::after{
+  content:'';position:absolute;inset:32px;border-radius:50%;
+  border:1.5px solid rgba(52,211,153,.2);
+  animation:ringPulse 2s ease-in-out infinite .5s;
+}
+.s6-coin-ico{font-size:62px;animation:coinBounce .65s var(--spring) both;}
+.s6-earned-lbl{
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--green);margin-bottom:4px;
+}
+.s6-earned-amt{
+  font-size:54px;font-weight:900;color:var(--text);
+  letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums;
+}
+.s6-compare{font-size:14px;color:var(--text-sec);text-align:center;margin:8px 0 20px;line-height:1.5;}
+.s6-compare strong{color:var(--purple-lt);font-weight:700;}
+.s6-xp-card{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:16px;padding:14px 16px;margin-bottom:12px;
+}
+.s6-xp-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.s6-xp-lbl{
+  font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-muted);display:flex;align-items:center;gap:6px;
+}
+.s6-xp-lbl i{color:var(--gold);}
+.s6-xp-lvl{font-size:12px;font-weight:700;color:var(--gold);}
+.s6-xp-bar{width:100%;height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.s6-xp-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--gold),#FDE68A);
+  width:0%;transition:width 1.1s var(--ease-out) .3s;
+  box-shadow:0 0 9px rgba(251,191,36,.5);
+}
+.s6-streak-row{width:100%;display:flex;gap:10px;margin-bottom:18px;}
+.s6-streak-card{
+  flex:1;background:rgba(251,191,36,.06);
+  border:1px solid rgba(251,191,36,.15);border-radius:14px;
+  padding:12px;display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.s6-level-card{
+  flex:1;background:rgba(139,92,246,.06);
+  border:1px solid rgba(139,92,246,.15);border-radius:14px;
+  padding:12px;display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.s6-card-ico{font-size:22px;}
+.s6-card-num-g{font-size:18px;font-weight:900;color:var(--gold);}
+.s6-card-num-p{font-size:18px;font-weight:900;color:var(--purple-lt);}
+.s6-card-lbl{font-size:10px;color:var(--text-muted);text-align:center;}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 7 — CASHOUT MOTIVATION
+════════════════════════════════════════════════════════════ */
+#s7{display:flex;flex-direction:column;padding:0 22px 36px;}
+.s7-title{
+  font-size:24px;font-weight:900;color:var(--text);
+  letter-spacing:-.025em;margin-top:10px;margin-bottom:6px;
+}
+.s7-sub{font-size:13px;color:var(--text-sec);margin-bottom:18px;}
+.s7-prog-card{
+  background:linear-gradient(135deg,rgba(52,211,153,.09),rgba(52,211,153,.02));
+  border:1px solid rgba(52,211,153,.2);border-radius:20px;
+  padding:20px;margin-bottom:16px;position:relative;overflow:hidden;
+}
+.s7-prog-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--green),transparent);
+}
+.s7-prog-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.s7-bal-col{display:flex;flex-direction:column;}
+.s7-bal-amt{font-size:30px;font-weight:900;color:var(--text);letter-spacing:-.035em;}
+.s7-bal-target{font-size:11px;color:var(--text-muted);}
+.s7-pct{font-size:24px;font-weight:900;color:var(--green);}
+.s7-bar-outer{width:100%;height:8px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden;margin-bottom:6px;}
+.s7-bar-inner{
+  height:100%;border-radius:4px;
+  background:linear-gradient(90deg,var(--green),#A7F3D0);
+  width:10%;transition:width 1.2s var(--ease-out);
+  box-shadow:0 0 10px var(--green-glow);
+}
+.s7-bar-lbls{display:flex;justify-content:space-between;}
+.s7-bar-txt{font-size:11px;color:var(--text-muted);}
+.s7-methods{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.s7-method{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.03);border:1.5px solid var(--border);
+  border-radius:16px;padding:14px 16px;cursor:pointer;
+  transition:border-color .2s,background .2s,transform .15s;
+}
+.s7-method.sel{border-color:var(--purple);background:var(--purple-dim);}
+.s7-method:active{transform:scale(.98);}
+.s7-method-ico{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;
+}
+.s7-method-info{flex:1;}
+.s7-method-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.s7-method-detail{font-size:11px;color:var(--text-muted);}
+.s7-radio{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--border-hi);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:border-color .2s,background .2s;
+}
+.s7-method.sel .s7-radio{border-color:var(--purple);background:var(--purple);}
+.s7-radio-dot{
+  width:8px;height:8px;border-radius:50%;background:#fff;
+  opacity:0;transform:scale(0);
+  transition:opacity .2s,transform .2s var(--spring);
+}
+.s7-method.sel .s7-radio-dot{opacity:1;transform:scale(1);}
+.s7-trust{
+  display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:16px;
+}
+.s7-trust-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted);}
+.s7-trust-item i{color:var(--green);font-size:13px;}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 8 — DASHBOARD
+════════════════════════════════════════════════════════════ */
+#s8{display:flex;flex-direction:column;padding:0 0 80px;position:relative;}
+.s8-topnav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px 20px 10px;flex-shrink:0;
+}
+.s8-lvl-badge{
+  display:flex;align-items:center;gap:7px;
+  background:var(--purple-dim);border:1px solid rgba(139,92,246,.25);
+  border-radius:100px;padding:5px 12px 5px 5px;
+}
+.s8-lvl-av{
+  width:26px;height:26px;border-radius:50%;
+  background:linear-gradient(135deg,var(--purple-dk),var(--purple-lt));
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:#fff;font-weight:800;
+}
+.s8-lvl-txt{font-size:12px;font-weight:700;color:var(--purple-lt);}
+.s8-nav-icons{display:flex;align-items:center;gap:8px;}
+.s8-ico-btn{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(255,255,255,.05);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  position:relative;transition:background .2s;
+}
+.s8-ico-btn i{color:var(--text-sec);font-size:18px;}
+.notif-dot{
+  position:absolute;top:6px;right:6px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--red);border:1.5px solid var(--bg);
+}
+/* Balance hero */
+.s8-balance-hero{
+  margin:0 16px 14px;
+  background:linear-gradient(135deg,#160630,#28106A,#160630);
+  border:1px solid rgba(139,92,246,.28);border-radius:24px;
+  padding:22px;position:relative;overflow:hidden;
+}
+.s8-balance-hero::before{
+  content:'';position:absolute;top:-50px;right:-50px;
+  width:180px;height:180px;
+  background:radial-gradient(circle,rgba(139,92,246,.42) 0%,transparent 70%);
+  animation:breatheC 5s ease-in-out infinite;
+}
+.s8-balance-hero::after{
+  content:'';position:absolute;bottom:-25px;left:30px;
+  width:120px;height:120px;
+  background:radial-gradient(circle,rgba(52,211,153,.2) 0%,transparent 70%);
+  animation:breatheC 5s ease-in-out infinite 2.5s;
+}
+.s8-bal-inner{position:relative;z-index:1;}
+.s8-bal-lbl{
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);margin-bottom:4px;
+}
+.s8-bal-num{
+  font-size:46px;font-weight:900;color:var(--text);
+  letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums;
+  margin-bottom:16px;
+}
+.s8-bal-actions{display:flex;gap:10px;}
+.s8-bal-btn{
+  flex:1;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.14);border-radius:12px;
+  padding:10px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:var(--text);
+  transition:background .2s,transform .15s;
+}
+.s8-bal-btn:active{transform:scale(.96);}
+.s8-bal-btn.primary{
+  background:linear-gradient(135deg,var(--purple-dk),var(--purple));
+  border-color:transparent;box-shadow:0 4px 18px rgba(109,40,217,.42);
+}
+/* Streak */
+.s8-streak{
+  margin:0 16px 14px;
+  background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);
+  border-radius:18px;padding:14px 16px;
+}
+.s8-str-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.s8-str-title{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--gold);}
+.s8-str-count{font-size:12px;color:var(--text-muted);}
+.s8-str-days{display:flex;gap:6px;}
+.s8-str-day{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.s8-str-circle{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+}
+.s8-str-day.done .s8-str-circle{background:var(--gold-dim);border-color:rgba(251,191,36,.35);}
+.s8-str-day.today .s8-str-circle{
+  background:var(--gold);border-color:var(--gold);
+  box-shadow:0 0 14px var(--gold-glow);
+}
+.s8-str-lbl{font-size:9px;font-weight:600;color:var(--text-muted);letter-spacing:.05em;}
+/* Section header */
+.s8-sec-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;margin-bottom:10px;
+}
+.s8-sec-title{font-size:14px;font-weight:800;color:var(--text);}
+.s8-sec-link{font-size:12px;font-weight:600;color:var(--purple-lt);cursor:pointer;}
+/* Offer scroll */
+.s8-scroll{
+  display:flex;gap:12px;padding:0 16px;
+  overflow-x:auto;scrollbar-width:none;margin-bottom:16px;
+}
+.s8-scroll::-webkit-scrollbar{display:none;}
+.s8-offer-mini{
+  min-width:155px;background:rgba(255,255,255,.04);
+  border:1px solid var(--border);border-radius:18px;
+  padding:14px;display:flex;flex-direction:column;gap:8px;flex-shrink:0;
+  cursor:pointer;transition:border-color .2s,transform .15s;
+}
+.s8-offer-mini:active{transform:scale(.97);}
+.s8-offer-mini:first-child{border-color:rgba(139,92,246,.25);}
+.s8-mini-thumb{
+  width:100%;height:76px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;font-size:36px;
+}
+.s8-mini-th-a{background:linear-gradient(135deg,#1E0A3C,#5B21B6);}
+.s8-mini-th-b{background:linear-gradient(135deg,#0A2A1E,#065F46);}
+.s8-mini-th-c{background:linear-gradient(135deg,#3C200A,#92400E);}
+.s8-mini-th-d{background:linear-gradient(135deg,#1E1A0A,#78350F);}
+.s8-mini-tags{display:flex;gap:5px;}
+.s8-mini-tag{
+  font-size:9px;font-weight:700;border-radius:5px;padding:2px 6px;
+}
+.s8-mini-tag-hot{background:rgba(244,114,182,.12);color:var(--pink);}
+.s8-mini-tag-new{background:var(--purple-dim);color:var(--purple-lt);}
+.s8-mini-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.3;}
+.s8-mini-row{display:flex;align-items:center;justify-content:space-between;}
+.s8-mini-amt{font-size:15px;font-weight:900;color:var(--gold);}
+.s8-mini-time{font-size:10px;color:var(--text-muted);}
+/* XP bar */
+.s8-xp{
+  margin:0 16px 14px;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:14px;padding:12px 16px;
+}
+.s8-xp-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.s8-xp-lbl{
+  font-size:11px;font-weight:700;color:var(--text-sec);
+  display:flex;align-items:center;gap:5px;
+}
+.s8-xp-lbl i{color:var(--purple-lt);}
+.s8-xp-val{font-size:11px;font-weight:700;color:var(--text-muted);}
+.s8-xp-outer{width:100%;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.s8-xp-inner{
+  height:100%;border-radius:3px;width:35%;
+  background:linear-gradient(90deg,var(--purple-dk),var(--purple-lt));
+  box-shadow:0 0 8px var(--purple-glow);
+}
+/* Recent payouts */
+.s8-payouts{margin:0 16px 16px;display:flex;flex-direction:column;gap:8px;}
+.s8-payout{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.02);border:1px solid var(--border);
+  border-radius:14px;padding:12px 14px;
+}
+.s8-pay-ico{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--green-dim);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--green);flex-shrink:0;
+}
+.s8-pay-info{flex:1;}
+.s8-pay-method{font-size:13px;font-weight:700;color:var(--text);}
+.s8-pay-date{font-size:11px;color:var(--text-muted);}
+.s8-pay-amt{font-size:15px;font-weight:800;color:var(--green);}
+/* Bottom Nav */
+.s8-bot-nav{
+  position:absolute;bottom:0;left:0;right:0;height:76px;
+  background:rgba(9,9,26,.96);backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-around;
+  padding:0 4px;z-index:50;
+}
+.s8-nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:8px 16px;cursor:pointer;border-radius:12px;
+  transition:background .2s;position:relative;
+}
+.s8-nav-item.on{background:var(--purple-dim);}
+.s8-nav-item i{font-size:22px;color:var(--text-muted);transition:color .2s;}
+.s8-nav-item.on i{color:var(--purple-lt);}
+.s8-nav-lbl{font-size:10px;font-weight:600;color:var(--text-muted);transition:color .2s;}
+.s8-nav-item.on .s8-nav-lbl{color:var(--purple-lt);}
+
+/* ════════════════════════════════════════════════════════════
+   NAV DOTS & RESTART
+════════════════════════════════════════════════════════════ */
+.nav-dots{display:flex;align-items:center;gap:6px;}
+.nav-dot{
+  width:6px;height:6px;border-radius:3px;
+  background:rgba(255,255,255,.14);cursor:pointer;
+  transition:background .3s,width .3s;
+}
+.nav-dot.on{background:var(--purple-lt);width:18px;}
+.restart-btn{
+  background:transparent;color:rgba(255,255,255,.28);
+  font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;
+  border:1px solid rgba(255,255,255,.07);border-radius:10px;
+  padding:8px 16px;cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+  transition:color .2s,border-color .2s;
+}
+.restart-btn:hover{color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.18);}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
   }
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     PHONE FRAME
-     ============================================================ -->
+<!-- SVG Gradient Defs -->
+<svg width="0" height="0" style="position:absolute;pointer-events:none;">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6D28D9"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+</svg>
+
 <div class="phone-wrap">
   <div class="phone">
-    <!-- Notch -->
-    <div class="phone-notch"></div>
+    <div class="notch"></div>
 
     <!-- Status Bar -->
     <div class="status-bar">
@@ -1081,716 +986,1016 @@ html, body {
       </div>
     </div>
 
-    <!-- Screens -->
     <div class="screens">
 
-      <!-- ====================================================
-           SCREEN 1 — VALUE HOOK
-           ==================================================== -->
-      <div class="screen" id="screen1">
+      <!-- ══════════════════════════════════════════════
+           SCREEN 1 — SPLASH
+           ══════════════════════════════════════════════ -->
+      <div class="screen" id="s1">
+        <div class="s1-glow1"></div>
+        <div class="s1-glow2"></div>
+        <canvas id="s1Canvas"></canvas>
 
-        <!-- Logo -->
-        <div class="s1-logo">
-          <div class="logo-icon"><i class="ti ti-coins"></i></div>
-          <div class="logo-text">free<span>cash</span></div>
-        </div>
-
-        <!-- Earning Loop -->
-        <div class="earning-loop">
-          <div class="loop-step" id="loop-step-0">
-            <div class="loop-step-icon"><i class="ti ti-device-mobile"></i></div>
-            <div class="loop-step-label">Offer</div>
-          </div>
-          <div class="loop-arrow"><i class="ti ti-chevron-right"></i></div>
-          <div class="loop-step" id="loop-step-1">
-            <div class="loop-step-icon"><i class="ti ti-check"></i></div>
-            <div class="loop-step-label">Complete</div>
-          </div>
-          <div class="loop-arrow"><i class="ti ti-chevron-right"></i></div>
-          <div class="loop-step" id="loop-step-2">
-            <div class="loop-step-icon"><i class="ti ti-cash"></i></div>
-            <div class="loop-step-label">Cash Out</div>
-          </div>
-        </div>
-
-        <!-- Social Proof Card -->
-        <div class="social-proof">
-          <div class="social-proof-number" id="counterEl">€0</div>
-          <div class="social-proof-label">earned by our users last month</div>
-        </div>
-
-        <!-- Live Ticker -->
-        <div class="live-ticker">
-          <div class="ticker-dot"></div>
-          <div class="ticker-content" id="tickerContent">
-            <div class="ticker-text" id="tickerText">
-              <strong>Marco from Italy</strong> just cashed out
+        <div class="s1-inner">
+          <div class="s1-logo-wrap">
+            <div class="s1-logo-icon">
+              <i class="ti ti-coins"></i>
             </div>
-            <div class="ticker-amount" id="tickerAmount">€47.20</div>
+            <div class="s1-logo-text">free<span>cash</span></div>
+          </div>
+
+          <div class="s1-tagline">
+            Play games.<br>Earn <span class="grad">real rewards.</span>
+          </div>
+
+          <div class="s1-counter-card">
+            <div class="s1-live-row">
+              <div class="live-dot"></div>
+              <div class="live-lbl">Live Total Paid Out</div>
+            </div>
+            <div class="s1-counter-num" id="s1CounterNum">€0</div>
+            <div class="s1-counter-sub">earned by our community this month</div>
+          </div>
+
+          <div class="s1-avatars">
+            <div class="avatar-stack">
+              <div class="av av-a">🧑</div>
+              <div class="av av-b">👩</div>
+              <div class="av av-c">👨</div>
+              <div class="av av-d">🧑</div>
+            </div>
+            <div class="av-txt">
+              <strong>1.2 million+</strong>
+              active earners worldwide
+            </div>
+          </div>
+
+          <div class="s1-cta-wrap">
+            <button class="btn-primary" id="s1Cta">
+              Start Earning Now <i class="ti ti-arrow-right"></i>
+            </button>
+            <div class="s1-trust">
+              <div class="s1-trust-item"><i class="ti ti-shield-check"></i>SSL Secured</div>
+              <div class="s1-trust-item"><i class="ti ti-bolt"></i>Instant Payouts</div>
+              <div class="s1-trust-item"><i class="ti ti-star"></i>4.7 Rating</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           SCREEN 2 — TRUST & SOCIAL PROOF
+           ══════════════════════════════════════════════ -->
+      <div class="screen" id="s2">
+        <div class="s2-glow"></div>
+        <div class="screen-hdr">
+          <button class="back-btn" data-goto="1"><i class="ti ti-arrow-left"></i></button>
+          <span class="step-pill">Step 1 of 7</span>
+          <div class="spacer"></div>
+        </div>
+
+        <div class="s2-inner" style="padding:0 22px;">
+          <div class="s2-title">Millions already<br><span>earning rewards</span></div>
+
+          <div class="s2-payout-hero">
+            <div class="s2-today-lbl">
+              <div class="live-dot"></div>
+              Verified Payouts Today
+            </div>
+            <div class="s2-payout-num" id="s2PayoutNum">€0</div>
+            <div class="s2-payout-sub">paid to real users in the last 24 hours</div>
+          </div>
+
+          <div class="s2-feed">
+            <div class="s2-feed-item">
+              <div class="s2-feed-av s2-feed-av-a">🧑</div>
+              <div class="s2-feed-info">
+                <div class="s2-feed-name">Marco from Italy</div>
+                <div class="s2-feed-action">Cashed out via PayPal · 2m ago</div>
+              </div>
+              <div class="s2-feed-amt">€47.20</div>
+            </div>
+            <div class="s2-feed-item">
+              <div class="s2-feed-av s2-feed-av-b">👩</div>
+              <div class="s2-feed-info">
+                <div class="s2-feed-name">Sophia from Germany</div>
+                <div class="s2-feed-action">Cashed out via Bank · 5m ago</div>
+              </div>
+              <div class="s2-feed-amt">€89.00</div>
+            </div>
+            <div class="s2-feed-item">
+              <div class="s2-feed-av s2-feed-av-c">👨</div>
+              <div class="s2-feed-info">
+                <div class="s2-feed-name">James from UK</div>
+                <div class="s2-feed-action">Cashed out via Crypto · 11m ago</div>
+              </div>
+              <div class="s2-feed-amt">€103.50</div>
+            </div>
+          </div>
+
+          <div class="s2-rating">
+            <div class="s2-stars">
+              <i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i>
+              <i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i>
+              <i class="ti ti-star-half-filled"></i>
+            </div>
+            <div class="s2-rat-txt"><strong>4.7</strong> · 480,000+ reviews</div>
+          </div>
+
+          <div class="s2-badges">
+            <div class="s2-badge">
+              <i class="ti ti-shield-check"></i>
+              <div class="s2-badge-txt">SSL Encrypted &amp; Secure</div>
+            </div>
+            <div class="s2-badge">
+              <i class="ti ti-certificate"></i>
+              <div class="s2-badge-txt">Verified Payouts</div>
+            </div>
+            <div class="s2-badge">
+              <i class="ti ti-bolt"></i>
+              <div class="s2-badge-txt">Instant Transfer</div>
+            </div>
+          </div>
+
+          <div class="s2-testi">
+            <div class="s2-quote">"I was skeptical at first, but I withdrew €50 to PayPal in my first week. It's actually real — insane!"</div>
+            <div class="s2-quote-author">
+              <div class="s2-q-av">A</div>
+              <div>
+                <div class="s2-q-name">Alex M.</div>
+                <div class="s2-q-country">🇩🇪 Germany · Top Earner</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="s2Cta">
+            Continue <i class="ti ti-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           SCREEN 3 — PERSONALIZATION
+           ══════════════════════════════════════════════ -->
+      <div class="screen" id="s3">
+        <div class="screen-hdr">
+          <button class="back-btn" data-goto="2"><i class="ti ti-arrow-left"></i></button>
+          <span class="step-pill">Step 2 of 7</span>
+          <div class="spacer"></div>
+        </div>
+        <div style="padding:0 22px;">
+          <div class="s3-title">What would you<br>like to earn for?</div>
+          <div class="s3-sub">Pick what excites you — we'll match your best offers.</div>
+
+          <div class="s3-grid">
+            <div class="s3-card" data-interest="gaming">
+              <div class="s3-check"><i class="ti ti-check"></i></div>
+              <div class="s3-card-icon">🎮</div>
+              <div class="s3-card-lbl">Gaming</div>
+            </div>
+            <div class="s3-card" data-interest="paypal">
+              <div class="s3-check"><i class="ti ti-check"></i></div>
+              <div class="s3-card-icon">💰</div>
+              <div class="s3-card-lbl">PayPal Cash</div>
+            </div>
+            <div class="s3-card" data-interest="coffee">
+              <div class="s3-check"><i class="ti ti-check"></i></div>
+              <div class="s3-card-icon">☕</div>
+              <div class="s3-card-lbl">Coffee</div>
+            </div>
+            <div class="s3-card" data-interest="shopping">
+              <div class="s3-check"><i class="ti ti-check"></i></div>
+              <div class="s3-card-icon">🛍️</div>
+              <div class="s3-card-lbl">Shopping</div>
+            </div>
+            <div class="s3-card" data-interest="crypto">
+              <div class="s3-check"><i class="ti ti-check"></i></div>
+              <div class="s3-card-icon">₿</div>
+              <div class="s3-card-lbl">Crypto</div>
+            </div>
+            <div class="s3-card" data-interest="tech">
+              <div class="s3-check"><i class="ti ti-check"></i></div>
+              <div class="s3-card-icon">💻</div>
+              <div class="s3-card-lbl">Tech Gadgets</div>
+            </div>
+          </div>
+
+          <div class="s3-note">
+            <i class="ti ti-wand"></i>
+            <span>Your offers will be <strong style="color:var(--text);">personally curated</strong> based on your choices.</span>
+          </div>
+
+          <button class="btn-primary" id="s3Cta">
+            Build My Rewards Path <i class="ti ti-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           SCREEN 4 — FIRST EARNINGS GOAL
+           ══════════════════════════════════════════════ -->
+      <div class="screen" id="s4">
+        <div class="screen-hdr">
+          <button class="back-btn" data-goto="3"><i class="ti ti-arrow-left"></i></button>
+          <span class="step-pill">Step 3 of 7</span>
+          <div class="spacer"></div>
+        </div>
+
+        <div class="s4-ring-wrap">
+          <svg class="s4-ring-svg" viewBox="0 0 160 160">
+            <circle class="s4-ring-bg" cx="80" cy="80" r="70"/>
+            <circle class="s4-ring-fill" id="s4RingFill" cx="80" cy="80" r="70"/>
+          </svg>
+          <div class="s4-ring-center">
+            <div class="s4-ring-amt">€5</div>
+            <div class="s4-ring-lbl">First Goal</div>
           </div>
         </div>
 
-        <!-- CTA Button -->
-        <button class="cta-btn" id="s1Cta">
-          Build my earner profile
-          <i class="ti ti-arrow-right"></i>
+        <div class="s4-headline">Let's earn your first €5</div>
+        <div class="s4-sub">
+          <i class="ti ti-clock"></i>
+          Most users complete this in under <strong>10 minutes</strong>
+        </div>
+
+        <div class="s4-milestones">
+          <div class="s4-ms active">
+            <div class="s4-ms-ico"><i class="ti ti-device-mobile"></i></div>
+            <div class="s4-ms-info">
+              <div class="s4-ms-title">Install a game app</div>
+              <div class="s4-ms-sub">Takes about 2 minutes</div>
+            </div>
+            <div class="s4-ms-rew">+€0.50</div>
+          </div>
+          <div class="s4-ms">
+            <div class="s4-ms-ico"><i class="ti ti-player-play"></i></div>
+            <div class="s4-ms-info">
+              <div class="s4-ms-title">Finish the tutorial</div>
+              <div class="s4-ms-sub">Takes about 5 minutes</div>
+            </div>
+            <div class="s4-ms-rew">+€1.00</div>
+          </div>
+          <div class="s4-ms">
+            <div class="s4-ms-ico"><i class="ti ti-trophy"></i></div>
+            <div class="s4-ms-info">
+              <div class="s4-ms-title">Reach Level 3</div>
+              <div class="s4-ms-sub">Unlocks full reward</div>
+            </div>
+            <div class="s4-ms-rew">+€3.50</div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="s4Cta" style="margin:0 0 0 0;width:calc(100% - 0px);">
+          Start First Task <i class="ti ti-arrow-right"></i>
         </button>
+      </div>
 
-        <!-- Subtext -->
-        <p class="s1-subtext">
-          Takes 90 seconds. Earn <strong>€0.40</strong> just by answering.
-        </p>
-
-      </div><!-- end screen1 -->
-
-      <!-- ====================================================
-           SCREEN 2 — PROFILE BUILDER
-           ==================================================== -->
-      <div class="screen" id="screen2">
-
-        <!-- Header -->
-        <div class="s2-header">
-          <div class="s2-header-row">
-            <div class="s2-avatar-group">
-              <div class="s2-avatar"><i class="ti ti-user"></i></div>
-              <div class="streak-pill">
-                <i class="ti ti-flame"></i>
-                Day 1
-              </div>
-            </div>
-            <div class="balance-pill" id="balancePill">€0.00</div>
-          </div>
-          <div class="s2-profile-label">Earner Profile</div>
+      <!-- ══════════════════════════════════════════════
+           SCREEN 5 — QUICK WIN OFFERS
+           ══════════════════════════════════════════════ -->
+      <div class="screen" id="s5">
+        <div class="screen-hdr">
+          <button class="back-btn" data-goto="4"><i class="ti ti-arrow-left"></i></button>
+          <span class="step-pill">Step 4 of 7</span>
+          <div class="spacer"></div>
         </div>
+        <div style="padding:0 22px;">
 
-        <!-- Progress Section -->
-        <div class="progress-section">
-          <div class="progress-ring-wrap">
-            <svg class="progress-ring-svg" viewBox="0 0 120 120">
-              <circle class="progress-ring-bg" cx="60" cy="60" r="52"/>
-              <circle class="progress-ring-fill" id="progressRing" cx="60" cy="60" r="52"/>
-            </svg>
-            <div class="progress-ring-center">
-              <div class="progress-pct" id="progressPct">0%</div>
-              <div class="progress-complete-label">Complete</div>
+          <div class="s5-bal">
+            <div class="s5-bal-left">
+              <div class="s5-bal-lbl">Current Balance</div>
+              <div class="s5-bal-num">€0.50</div>
+            </div>
+            <div class="s5-cashout-hint">
+              You're <strong>10%</strong> to your first cashout 🎯
             </div>
           </div>
 
-          <div class="earning-potential-row">
-            <div class="ep-label">Earning Potential</div>
-            <div class="ep-value">
-              <span class="ep-number" id="epNumber">€0</span>
-              <span class="ep-suffix">/week</span>
+          <div class="s5-progress-wrap">
+            <div class="s5-prog-top">
+              <div class="s5-prog-lbl">Progress to €5 Cashout</div>
+              <div class="s5-prog-pct">10%</div>
             </div>
-          </div>
-        </div>
-
-        <!-- Card Stack -->
-        <div class="card-stack" id="cardStack">
-          <!-- Cards rendered by JS -->
-        </div>
-
-      </div><!-- end screen2 -->
-
-      <!-- ====================================================
-           SCREEN 3 — PROFILE COMPLETE
-           ==================================================== -->
-      <div class="screen" id="screen3">
-        <canvas class="s3-canvas" id="particleCanvas"></canvas>
-
-        <div class="s3-content">
-
-          <!-- Complete ring -->
-          <div class="s3-ring-wrap">
-            <svg class="s3-ring-svg" viewBox="0 0 120 120">
-              <circle class="s3-ring-bg" cx="60" cy="60" r="52"/>
-              <circle class="s3-ring-fill" id="s3Ring" cx="60" cy="60" r="52"/>
-            </svg>
-            <div class="s3-ring-center">
-              <i class="ti ti-check"></i>
+            <div class="s5-prog-bar-outer">
+              <div class="s5-prog-bar-fill" id="s5ProgFill"></div>
             </div>
           </div>
 
-          <!-- Headline -->
-          <div class="s3-headline">Your earner profile&#10;is ready!</div>
-          <div class="s3-subheadline">Matched with offers just for you</div>
+          <div class="section-lbl" style="margin-bottom:10px;">⚡ Your 3 Quick Wins</div>
 
-          <!-- Stats row -->
-          <div class="s3-stats">
-            <div class="s3-stat">
-              <div class="s3-stat-value green">47</div>
-              <div class="s3-stat-label">Offers Matched</div>
-            </div>
-            <div class="s3-stat">
-              <div class="s3-stat-value gold">€120</div>
-              <div class="s3-stat-label">Earn / Week</div>
-            </div>
-            <div class="s3-stat">
-              <div class="s3-stat-value" id="s3CashoutIcon" style="color: var(--text-sec);">
-                <i class="ti ti-brand-paypal"></i>
+          <div class="s5-offers">
+            <!-- Offer 1 -->
+            <div class="s5-offer">
+              <div class="s5-offer-top">
+                <div class="s5-thumb s5-th-a">⚔️</div>
+                <div class="s5-offer-info">
+                  <div class="s5-offer-tags">
+                    <span class="s5-tag s5-tag-hot">🔥 Trending</span>
+                    <span class="s5-tag s5-tag-fast">Fast Payout</span>
+                  </div>
+                  <div class="s5-offer-name">Arena Warriors</div>
+                  <div class="s5-offer-task">Reach Arena 5 to unlock reward</div>
+                </div>
+                <div class="s5-offer-right">
+                  <div class="s5-offer-amt">€3.50</div>
+                  <div class="s5-offer-time"><i class="ti ti-clock"></i>~15 min</div>
+                </div>
               </div>
-              <div class="s3-stat-label">Cashout Ready</div>
-            </div>
-          </div>
-
-          <!-- Cashout chip -->
-          <div class="cashout-chip">
-            <div class="cashout-chip-icon" id="cashoutChipIcon">
-              <i class="ti ti-brand-paypal"></i>
-            </div>
-            <div class="cashout-chip-info">
-              <div class="cashout-chip-label">Cashout Method</div>
-              <div class="cashout-chip-method" id="cashoutChipMethod">PayPal</div>
-            </div>
-            <div class="cashout-configured">
-              <i class="ti ti-circle-filled" style="font-size:8px;"></i>
-              Configured
-            </div>
-          </div>
-
-          <!-- First Offer -->
-          <div class="s3-section-label">Your First Offer</div>
-          <div class="offer-card">
-            <div class="offer-icon"><i class="ti ti-sword"></i></div>
-            <div class="offer-info">
-              <div class="offer-name">Palmon: Survival iOS</div>
-              <div class="offer-desc">Reach Level 20 to earn</div>
-              <div class="offer-badges">
-                <span class="badge badge-easy">Easy</span>
-                <span class="badge badge-time">~20 min</span>
+              <div class="s5-prog-row">
+                <div class="s5-prog-bar-s">
+                  <div class="s5-prog-fill-s" style="width:0%"></div>
+                </div>
+                <div class="s5-prog-lbls">
+                  <div class="s5-prog-txt">Arena 1 of 5</div>
+                  <div class="s5-prog-txt">0% complete</div>
+                </div>
               </div>
+              <button class="s5-play s5-play-btn">
+                <i class="ti ti-player-play"></i> Play Now — Earn €3.50
+              </button>
             </div>
-            <div class="offer-reward">
-              <div class="offer-amount">€8.50</div>
-              <div class="offer-reward-label">reward</div>
+
+            <!-- Offer 2 -->
+            <div class="s5-offer">
+              <div class="s5-offer-top">
+                <div class="s5-thumb s5-th-b">🧩</div>
+                <div class="s5-offer-info">
+                  <div class="s5-offer-tags">
+                    <span class="s5-tag s5-tag-easy">Easy</span>
+                  </div>
+                  <div class="s5-offer-name">BlockMaster</div>
+                  <div class="s5-offer-task">Reach Level 15 to earn</div>
+                </div>
+                <div class="s5-offer-right">
+                  <div class="s5-offer-amt">€1.00</div>
+                  <div class="s5-offer-time"><i class="ti ti-clock"></i>~5 min</div>
+                </div>
+              </div>
+              <div class="s5-prog-row">
+                <div class="s5-prog-bar-s">
+                  <div class="s5-prog-fill-s" style="width:0%"></div>
+                </div>
+                <div class="s5-prog-lbls">
+                  <div class="s5-prog-txt">Level 1 of 15</div>
+                  <div class="s5-prog-txt">0% complete</div>
+                </div>
+              </div>
+              <button class="s5-play s5-play-btn">
+                <i class="ti ti-player-play"></i> Play Now — Earn €1.00
+              </button>
+            </div>
+
+            <!-- Offer 3 -->
+            <div class="s5-offer">
+              <div class="s5-offer-top">
+                <div class="s5-thumb s5-th-c">🏰</div>
+                <div class="s5-offer-info">
+                  <div class="s5-offer-tags">
+                    <span class="s5-tag s5-tag-fast">Fast Payout</span>
+                  </div>
+                  <div class="s5-offer-name">Kingdom Builder</div>
+                  <div class="s5-offer-task">Build your first city</div>
+                </div>
+                <div class="s5-offer-right">
+                  <div class="s5-offer-amt">€0.50</div>
+                  <div class="s5-offer-time"><i class="ti ti-clock"></i>~3 min</div>
+                </div>
+              </div>
+              <div class="s5-prog-row">
+                <div class="s5-prog-bar-s">
+                  <div class="s5-prog-fill-s" style="width:0%"></div>
+                </div>
+                <div class="s5-prog-lbls">
+                  <div class="s5-prog-txt">Not started</div>
+                  <div class="s5-prog-txt">0% complete</div>
+                </div>
+              </div>
+              <button class="s5-play s5-play-btn">
+                <i class="ti ti-player-play"></i> Play Now — Earn €0.50
+              </button>
             </div>
           </div>
 
-          <!-- Balance earned chip -->
-          <div class="balance-earned-chip">
-            <div class="bec-label">Questions Earned</div>
-            <div class="bec-amount" id="becAmount">€0.40</div>
+          <button class="btn-secondary" id="s5Cta">Browse All Offers</button>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           SCREEN 6 — LIVE REWARD FEEDBACK
+           ══════════════════════════════════════════════ -->
+      <div class="screen" id="s6">
+        <canvas id="s6Canvas"></canvas>
+
+        <div class="s6-inner">
+          <div class="screen-hdr" style="width:100%;">
+            <div class="spacer"></div>
+            <span class="step-pill">Step 5 of 7</span>
+            <div class="spacer"></div>
           </div>
 
-          <!-- CTAs -->
-          <button class="s3-cta-primary">
-            <i class="ti ti-player-play"></i>
-            Start your first offer
+          <div class="s6-glow-ring">
+            <div class="s6-coin-ico">🪙</div>
+          </div>
+
+          <div class="s6-earned-lbl">You just earned</div>
+          <div class="s6-earned-amt" id="s6EarnedAmt">€0.00</div>
+          <div class="s6-compare">
+            You're ahead of <strong>82% of new users</strong> at this point!
+          </div>
+
+          <div class="s6-xp-card" style="width:100%;">
+            <div class="s6-xp-hdr">
+              <div class="s6-xp-lbl">
+                <i class="ti ti-star-filled"></i> XP Progress
+              </div>
+              <div class="s6-xp-lvl">Level 2 → 3</div>
+            </div>
+            <div class="s6-xp-bar">
+              <div class="s6-xp-fill" id="s6XpFill"></div>
+            </div>
+          </div>
+
+          <div class="s6-streak-row">
+            <div class="s6-streak-card">
+              <div class="s6-card-ico">🔥</div>
+              <div class="s6-card-num-g">1</div>
+              <div class="s6-card-lbl">Day Streak</div>
+            </div>
+            <div class="s6-level-card">
+              <div class="s6-card-ico">⬆️</div>
+              <div class="s6-card-num-p">Level 2</div>
+              <div class="s6-card-lbl">Leveled Up!</div>
+            </div>
+          </div>
+
+          <button class="btn-primary" id="s6Cta" style="width:calc(100% - 0px);">
+            Continue Earning <i class="ti ti-arrow-right"></i>
           </button>
-          <button class="s3-cta-secondary">
-            Browse all 47 offers
-          </button>
-
         </div>
-      </div><!-- end screen3 -->
+      </div>
 
-    </div><!-- end screens -->
-  </div><!-- end phone -->
+      <!-- ══════════════════════════════════════════════
+           SCREEN 7 — CASHOUT MOTIVATION
+           ══════════════════════════════════════════════ -->
+      <div class="screen" id="s7">
+        <div class="screen-hdr">
+          <button class="back-btn" data-goto="6"><i class="ti ti-arrow-left"></i></button>
+          <span class="step-pill">Step 6 of 7</span>
+          <div class="spacer"></div>
+        </div>
+        <div style="padding:0 22px;">
+          <div class="s7-title">You're almost<br>ready to cash out 💸</div>
+          <div class="s7-sub">Complete one more offer to unlock your first withdrawal.</div>
 
-  <!-- Restart button -->
-  <button class="restart-btn" id="restartBtn">
-    <i class="ti ti-refresh"></i>
-    Restart
-  </button>
-</div><!-- end phone-wrap -->
+          <div class="s7-prog-card">
+            <div class="s7-prog-hdr">
+              <div class="s7-bal-col">
+                <div class="s7-bal-amt">€0.50</div>
+                <div class="s7-bal-target">of €5.00 goal</div>
+              </div>
+              <div class="s7-pct">10%</div>
+            </div>
+            <div class="s7-bar-outer">
+              <div class="s7-bar-inner" id="s7BarInner"></div>
+            </div>
+            <div class="s7-bar-lbls">
+              <div class="s7-bar-txt">€0.50 earned</div>
+              <div class="s7-bar-txt">€4.50 remaining</div>
+            </div>
+          </div>
+
+          <div class="section-lbl" style="margin-bottom:12px;">Choose Cashout Method</div>
+
+          <div class="s7-methods">
+            <div class="s7-method sel" data-method="paypal">
+              <div class="s7-method-ico">💳</div>
+              <div class="s7-method-info">
+                <div class="s7-method-name">PayPal</div>
+                <div class="s7-method-detail">Instant transfer · No fees</div>
+              </div>
+              <div class="s7-radio">
+                <div class="s7-radio-dot"></div>
+              </div>
+            </div>
+            <div class="s7-method" data-method="crypto">
+              <div class="s7-method-ico">₿</div>
+              <div class="s7-method-info">
+                <div class="s7-method-name">Bitcoin / Crypto</div>
+                <div class="s7-method-detail">BTC, ETH, USDT · Fast</div>
+              </div>
+              <div class="s7-radio">
+                <div class="s7-radio-dot"></div>
+              </div>
+            </div>
+            <div class="s7-method" data-method="giftcard">
+              <div class="s7-method-ico">🎁</div>
+              <div class="s7-method-info">
+                <div class="s7-method-name">Gift Cards</div>
+                <div class="s7-method-detail">Amazon, Steam, Roblox &amp; more</div>
+              </div>
+              <div class="s7-radio">
+                <div class="s7-radio-dot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="s7-trust">
+            <div class="s7-trust-item"><i class="ti ti-shield-check"></i>No hidden fees</div>
+            <div class="s7-trust-item"><i class="ti ti-bolt"></i>Secure payouts</div>
+            <div class="s7-trust-item"><i class="ti ti-clock"></i>Instant</div>
+          </div>
+
+          <button class="btn-primary" id="s7Cta">
+            Complete One More Offer <i class="ti ti-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           SCREEN 8 — HOME DASHBOARD
+           ══════════════════════════════════════════════ -->
+      <div class="screen" id="s8">
+        <div class="s8-topnav">
+          <div class="s8-lvl-badge">
+            <div class="s8-lvl-av">2</div>
+            <div class="s8-lvl-txt">Level 2</div>
+          </div>
+          <div class="s8-nav-icons">
+            <div class="s8-ico-btn">
+              <i class="ti ti-bell"></i>
+              <div class="notif-dot"></div>
+            </div>
+            <div class="s8-ico-btn">
+              <i class="ti ti-wallet"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Balance Hero -->
+        <div class="s8-balance-hero">
+          <div class="s8-bal-inner">
+            <div class="s8-bal-lbl">Your Balance</div>
+            <div class="s8-bal-num">€0.50</div>
+            <div class="s8-bal-actions">
+              <button class="s8-bal-btn">
+                <i class="ti ti-arrow-up"></i> Withdraw
+              </button>
+              <button class="s8-bal-btn primary">
+                <i class="ti ti-plus"></i> Earn More
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Streak Tracker -->
+        <div class="s8-streak">
+          <div class="s8-str-hdr">
+            <div class="s8-str-title">🔥 Daily Streak</div>
+            <div class="s8-str-count">1 day · Keep going!</div>
+          </div>
+          <div class="s8-str-days">
+            <div class="s8-str-day done">
+              <div class="s8-str-circle">🔥</div>
+              <div class="s8-str-lbl">MON</div>
+            </div>
+            <div class="s8-str-day today">
+              <div class="s8-str-circle">⭐</div>
+              <div class="s8-str-lbl">TUE</div>
+            </div>
+            <div class="s8-str-day">
+              <div class="s8-str-circle"></div>
+              <div class="s8-str-lbl">WED</div>
+            </div>
+            <div class="s8-str-day">
+              <div class="s8-str-circle"></div>
+              <div class="s8-str-lbl">THU</div>
+            </div>
+            <div class="s8-str-day">
+              <div class="s8-str-circle"></div>
+              <div class="s8-str-lbl">FRI</div>
+            </div>
+            <div class="s8-str-day">
+              <div class="s8-str-circle"></div>
+              <div class="s8-str-lbl">SAT</div>
+            </div>
+            <div class="s8-str-day">
+              <div class="s8-str-circle"></div>
+              <div class="s8-str-lbl">SUN</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trending Offers -->
+        <div class="s8-sec-hdr">
+          <div class="s8-sec-title">🔥 Trending Offers</div>
+          <div class="s8-sec-link">See All</div>
+        </div>
+        <div class="s8-scroll">
+          <div class="s8-offer-mini">
+            <div class="s8-mini-thumb s8-mini-th-a">⚔️</div>
+            <div class="s8-mini-tags">
+              <span class="s8-mini-tag s8-mini-tag-hot">HOT</span>
+            </div>
+            <div class="s8-mini-name">Arena Warriors</div>
+            <div class="s8-mini-row">
+              <div class="s8-mini-amt">€3.50</div>
+              <div class="s8-mini-time">15 min</div>
+            </div>
+          </div>
+          <div class="s8-offer-mini">
+            <div class="s8-mini-thumb s8-mini-th-b">🧩</div>
+            <div class="s8-mini-tags">
+              <span class="s8-mini-tag s8-mini-tag-new">NEW</span>
+            </div>
+            <div class="s8-mini-name">BlockMaster Pro</div>
+            <div class="s8-mini-row">
+              <div class="s8-mini-amt">€1.00</div>
+              <div class="s8-mini-time">5 min</div>
+            </div>
+          </div>
+          <div class="s8-offer-mini">
+            <div class="s8-mini-thumb s8-mini-th-c">🏰</div>
+            <div class="s8-mini-tags">
+              <span class="s8-mini-tag s8-mini-tag-hot">EASY</span>
+            </div>
+            <div class="s8-mini-name">Kingdom Builder</div>
+            <div class="s8-mini-row">
+              <div class="s8-mini-amt">€0.50</div>
+              <div class="s8-mini-time">3 min</div>
+            </div>
+          </div>
+          <div class="s8-offer-mini">
+            <div class="s8-mini-thumb s8-mini-th-d">🚀</div>
+            <div class="s8-mini-tags">
+              <span class="s8-mini-tag s8-mini-tag-new">NEW</span>
+            </div>
+            <div class="s8-mini-name">Star Conquest</div>
+            <div class="s8-mini-row">
+              <div class="s8-mini-amt">€5.00</div>
+              <div class="s8-mini-time">30 min</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- XP Progress -->
+        <div class="s8-xp">
+          <div class="s8-xp-row">
+            <div class="s8-xp-lbl">
+              <i class="ti ti-star-filled"></i> XP Progress
+            </div>
+            <div class="s8-xp-val">350 / 1000 XP</div>
+          </div>
+          <div class="s8-xp-outer">
+            <div class="s8-xp-inner"></div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="s8-sec-hdr" style="margin-top:2px;">
+          <div class="s8-sec-title">Recent Activity</div>
+          <div class="s8-sec-link">History</div>
+        </div>
+        <div class="s8-payouts">
+          <div class="s8-payout">
+            <div class="s8-pay-ico"><i class="ti ti-coin"></i></div>
+            <div class="s8-pay-info">
+              <div class="s8-pay-method">Arena Warriors Reward</div>
+              <div class="s8-pay-date">Today · Completed</div>
+            </div>
+            <div class="s8-pay-amt">+€0.50</div>
+          </div>
+          <div class="s8-payout">
+            <div class="s8-pay-ico"><i class="ti ti-star"></i></div>
+            <div class="s8-pay-info">
+              <div class="s8-pay-method">Profile Setup Bonus</div>
+              <div class="s8-pay-date">Today · Completed</div>
+            </div>
+            <div class="s8-pay-amt">+€0.00</div>
+          </div>
+        </div>
+
+        <!-- Bottom Nav -->
+        <div class="s8-bot-nav">
+          <div class="s8-nav-item on">
+            <i class="ti ti-home"></i>
+            <div class="s8-nav-lbl">Home</div>
+          </div>
+          <div class="s8-nav-item">
+            <i class="ti ti-layout-grid"></i>
+            <div class="s8-nav-lbl">Offers</div>
+          </div>
+          <div class="s8-nav-item">
+            <i class="ti ti-gift"></i>
+            <div class="s8-nav-lbl">Rewards</div>
+          </div>
+          <div class="s8-nav-item">
+            <i class="ti ti-wallet"></i>
+            <div class="s8-nav-lbl">Wallet</div>
+          </div>
+          <div class="s8-nav-item">
+            <i class="ti ti-user"></i>
+            <div class="s8-nav-lbl">Profile</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /screens -->
+  </div><!-- /phone -->
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+    <div class="nav-dots" id="navDots"></div>
+    <button class="restart-btn" id="restartBtn">
+      <i class="ti ti-refresh"></i> Restart
+    </button>
+  </div>
+</div>
 
 <script>
-/* ============================================================
-   STATE & DATA
-   ============================================================ */
-const questions = [
-  { text: "What is your gender?", hint: "Helps us match lifestyle & beauty offers",
-    options: [{l:"Female",i:"ti-gender-female"},{l:"Male",i:"ti-gender-male"},{l:"Not specified",i:"ti-user-question"}], cols:3 },
-  { text: "How old are you?", hint: "Age-appropriate offers earn more",
-    options: [{l:"16–20",i:"ti-school"},{l:"21–29",i:"ti-briefcase"},{l:"30–49",i:"ti-home"},{l:"50+",i:"ti-star"}], cols:4 },
-  { text: "Preferred cashout?", hint: "We'll pre-configure your withdrawal",
-    options: [{l:"PayPal",i:"ti-brand-paypal"},{l:"Bank",i:"ti-building-bank"},{l:"Visa",i:"ti-credit-card"},{l:"Amazon",i:"ti-brand-amazon"}], cols:4 },
-  { text: "In-app purchases last month?", hint: "Unlocks premium offer categories",
-    options: [{l:"Yes",i:"ti-shopping-cart"},{l:"No",i:"ti-shopping-cart-off"}], cols:2 },
-  { text: "How often do you play mobile games?", hint: "200+ game offers are waiting",
-    options: [{l:"Daily",i:"ti-calendar-event"},{l:"Few/week",i:"ti-calendar-week"},{l:"Once/week",i:"ti-calendar"},{l:"Rarely",i:"ti-calendar-off"}], cols:4 },
-  { text: "Preferred game types?", hint: "We'll prioritize your best-paying genres",
-    options: [{l:"Casual",i:"ti-puzzle"},{l:"Strategy",i:"ti-brain"},{l:"RPG",i:"ti-sword"},{l:"Sports",i:"ti-ball-football"}], cols:4 },
-  { text: "How much to earn today?", hint: "We'll find offers matching your goal",
-    options: [{l:"€10",i:"ti-coin"},{l:"€20",i:"ti-coins"},{l:"€30",i:"ti-pig-money"},{l:"€50+",i:"ti-trophy"}], cols:4 },
-  { text: "How long can you play right now?", hint: "We'll match offer length to your time",
-    options: [{l:"5–15 min",i:"ti-clock"},{l:"15–30 min",i:"ti-clock-hour-3"},{l:"45–60 min",i:"ti-clock-hour-6"},{l:"60+ min",i:"ti-clock-hour-12"}], cols:4 }
-];
+/* ════════════════════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════════════════════ */
+const TOTAL = 8;
+let cur = 1;
+let interests = new Set();
+let s1AnimFrame = null;
 
-// Earning potential per question answered (index = answered count)
-const earningPotential = [0, 8, 20, 35, 50, 65, 82, 100, 120];
-
-const cashoutIconMap = {
-  'PayPal': 'ti-brand-paypal',
-  'Bank': 'ti-building-bank',
-  'Visa': 'ti-credit-card',
-  'Amazon': 'ti-brand-amazon'
-};
-
-// App state
-let state = {
-  currentScreen: 1,
-  currentQuestion: 0,      // 0-indexed current question being displayed (front card)
-  answeredCount: 0,        // how many answered
-  balance: 0,              // in cents to avoid float issues
-  selectedCashout: 'PayPal',
-  isAdvancing: false,
-  cardElements: []         // [front, mid, back] DOM elements
-};
-
-/* ============================================================
-   TICKER DATA
-   ============================================================ */
-const tickerData = [
-  { name: "Marco", country: "Italy", amount: "€47.20" },
-  { name: "Sophia", country: "Germany", amount: "€32.60" },
-  { name: "Lena", country: "Netherlands", amount: "€89.00" },
-  { name: "James", country: "UK", amount: "€15.80" },
-  { name: "Ana", country: "Spain", amount: "€61.40" },
-  { name: "Tom", country: "France", amount: "€28.90" },
-  { name: "Mia", country: "Sweden", amount: "€103.50" },
-  { name: "Lucas", country: "Brazil", amount: "€22.10" }
-];
-let tickerIdx = 0;
-
-/* ============================================================
-   SCREEN 1 LOGIC
-   ============================================================ */
-
-// Earning loop animation
-let loopStep = 0;
-const loopSteps = [
-  { el: null, cls: 'active-green' },
-  { el: null, cls: 'active-green' },
-  { el: null, cls: 'active-gold' }
-];
-
-function initLoopAnimation() {
-  loopSteps[0].el = document.getElementById('loop-step-0');
-  loopSteps[1].el = document.getElementById('loop-step-1');
-  loopSteps[2].el = document.getElementById('loop-step-2');
-
-  function tick() {
-    // Clear all
-    loopSteps.forEach((s, i) => {
-      s.el.classList.remove('active-green', 'active-gold');
-    });
-    // Light current
-    const s = loopSteps[loopStep];
-    s.el.classList.add(s.cls);
-    loopStep = (loopStep + 1) % 3;
-  }
-
-  tick();
-  setInterval(tick, 1500);
+/* ════════════════════════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════════════════════════ */
+function goTo(n) {
+  if (n === cur) return;
+  const prev = document.getElementById('s' + cur);
+  const next = document.getElementById('s' + n);
+  prev.classList.remove('active');
+  prev.classList.add('exit-left');
+  next.classList.add('active');
+  cur = n;
+  updateDots();
+  setTimeout(() => prev.classList.remove('exit-left'), 500);
+  onEnter(n);
 }
 
-// Social proof counter
-function animateCounter() {
-  const el = document.getElementById('counterEl');
-  const target = 2400000;
-  const duration = 1800;
+function updateDots() {
+  document.querySelectorAll('.nav-dot').forEach((d, i) => {
+    d.classList.toggle('on', i + 1 === cur);
+  });
+}
+
+function onEnter(n) {
+  if (n === 2) initS2();
+  if (n === 4) initS4();
+  if (n === 5) initS5();
+  if (n === 6) initS6();
+  if (n === 7) initS7();
+}
+
+/* ════════════════════════════════════════════════════════════
+   UTILITY
+════════════════════════════════════════════════════════════ */
+function animateCount(elId, from, to, dur, fmt) {
+  const el = document.getElementById(elId);
+  if (!el) return;
   const start = performance.now();
-
-  function update(now) {
-    const elapsed = now - start;
-    const t = Math.min(elapsed / duration, 1);
-    // ease-out cubic
+  function tick(now) {
+    const t = Math.min((now - start) / dur, 1);
     const eased = 1 - Math.pow(1 - t, 3);
-    const val = Math.floor(eased * target);
-
-    // Format with commas and euro sign
-    el.textContent = '€' + val.toLocaleString('en-EU');
-
-    if (t < 1) requestAnimationFrame(update);
-    else el.textContent = '€2,400,000';
+    const v = Math.floor(from + eased * (to - from));
+    el.textContent = fmt(v);
+    if (t < 1) requestAnimationFrame(tick);
   }
-
-  requestAnimationFrame(update);
+  requestAnimationFrame(tick);
 }
 
-// Ticker rotation
-function initTicker() {
-  const content = document.getElementById('tickerContent');
-  const text = document.getElementById('tickerText');
-  const amount = document.getElementById('tickerAmount');
+/* ════════════════════════════════════════════════════════════
+   SCREEN 1 — SPLASH PARTICLES + COUNTER
+════════════════════════════════════════════════════════════ */
+function initS1() {
+  animateCount('s1CounterNum', 0, 2400000, 2200, v => '€' + v.toLocaleString('en-US'));
 
-  function showTicker(idx) {
-    content.classList.add('fade');
-    setTimeout(() => {
-      const d = tickerData[idx % tickerData.length];
-      text.innerHTML = `<strong>${d.name} from ${d.country}</strong> just cashed out`;
-      amount.textContent = d.amount;
-      content.classList.remove('fade');
-    }, 300);
-  }
-
-  // Start cycling after first one shows
-  setInterval(() => {
-    tickerIdx = (tickerIdx + 1) % tickerData.length;
-    showTicker(tickerIdx);
-  }, 3500);
-}
-
-// Screen 1 CTA
-function initScreen1() {
-  document.getElementById('s1Cta').addEventListener('click', () => {
-    goToScreen(2);
-  });
-}
-
-/* ============================================================
-   SCREEN 2 LOGIC
-   ============================================================ */
-
-function buildCardHTML(qIdx) {
-  if (qIdx >= questions.length) return null;
-  const q = questions[qIdx];
-  const num = qIdx + 1;
-
-  const optionsHTML = q.options.map((opt, i) => `
-    <div class="q-option" data-opt-idx="${i}" data-q-idx="${qIdx}">
-      <i class="ti ${opt.i}"></i>
-      <span>${opt.l}</span>
-    </div>
-  `).join('');
-
-  return `
-    <div class="q-card-meta">Question ${num} of ${questions.length}</div>
-    <div class="q-card-question">${q.text}</div>
-    <div class="q-card-hint">${q.hint}</div>
-    <div class="q-options" style="grid-template-columns: repeat(${q.cols}, 1fr);">
-      ${optionsHTML}
-    </div>
-    <div class="q-card-reward">
-      <i class="ti ti-coins"></i>
-      <span>Answer earns <strong>+€0.05</strong></span>
-    </div>
-  `;
-}
-
-function createCard(qIdx, depth) {
-  const card = document.createElement('div');
-  card.className = 'q-card';
-  card.dataset.depth = depth;
-  card.dataset.qIdx = qIdx;
-
-  const html = buildCardHTML(qIdx);
-  if (html) card.innerHTML = html;
-
-  return card;
-}
-
-function attachOptionListeners(card) {
-  const opts = card.querySelectorAll('.q-option');
-  opts.forEach(opt => {
-    opt.addEventListener('click', () => {
-      if (state.isAdvancing) return;
-      const qIdx = parseInt(opt.dataset.qIdx);
-      if (qIdx !== state.currentQuestion) return;
-
-      // Mark selected
-      opts.forEach(o => o.classList.remove('selected'));
-      opt.classList.add('selected');
-
-      // Track cashout selection (question index 2)
-      if (qIdx === 2) {
-        const optIdx = parseInt(opt.dataset.optIdx);
-        state.selectedCashout = questions[2].options[optIdx].l;
-      }
-
-      // After short delay, advance
-      setTimeout(() => {
-        advanceCard();
-      }, 280);
-    });
-  });
-}
-
-function initCardStack() {
-  const stack = document.getElementById('cardStack');
-  stack.innerHTML = '';
-  state.cardElements = [];
-
-  // Create up to 3 cards (front=0, mid=1, back=2)
-  for (let d = 0; d < 3; d++) {
-    const qIdx = state.currentQuestion + d;
-    if (qIdx < questions.length) {
-      const card = createCard(qIdx, d);
-      stack.appendChild(card);
-      state.cardElements.push(card);
-      if (d === 0) {
-        attachOptionListeners(card);
-      }
-    }
-  }
-}
-
-function updateProgressRing(answeredCount) {
-  const ring = document.getElementById('progressRing');
-  const pct = document.getElementById('progressPct');
-  const circumference = 326.73;
-  const progress = answeredCount / questions.length;
-  const offset = circumference - (progress * circumference);
-  ring.style.strokeDashoffset = offset;
-  pct.textContent = Math.round(progress * 100) + '%';
-}
-
-function updateBalance() {
-  const pill = document.getElementById('balancePill');
-  const euros = (state.balance / 100).toFixed(2);
-  pill.textContent = '€' + euros;
-
-  // Flash gold
-  pill.classList.add('flash-gold');
-  setTimeout(() => {
-    pill.classList.remove('flash-gold');
-  }, 400);
-}
-
-function slotMachineNumber(el, finalVal) {
-  // Rapid scramble then settle
-  const chars = '0123456789';
-  let count = 0;
-  const maxCount = 12;
-  const interval = setInterval(() => {
-    if (count >= maxCount) {
-      clearInterval(interval);
-      el.textContent = '€' + finalVal;
-      return;
-    }
-    const rand = Math.floor(Math.random() * (finalVal + 50));
-    el.textContent = '€' + rand;
-    count++;
-  }, 50);
-}
-
-function advanceCard() {
-  if (state.isAdvancing) return;
-  state.isAdvancing = true;
-
-  const stack = document.getElementById('cardStack');
-  const frontCard = state.cardElements[0];
-
-  // Update answered count and stats
-  state.answeredCount++;
-  state.balance += 5; // €0.05 = 5 cents
-
-  // Update balance pill
-  updateBalance();
-
-  // Update progress ring
-  updateProgressRing(state.answeredCount);
-
-  // Update earning potential with slot machine
-  const ep = earningPotential[state.answeredCount];
-  const epEl = document.getElementById('epNumber');
-  slotMachineNumber(epEl, ep);
-
-  // Animate front card exit
-  frontCard.classList.add('exiting');
-
-  // Shift remaining cards up in depth
-  setTimeout(() => {
-    // Remove exiting card from DOM after animation
-    setTimeout(() => {
-      if (frontCard.parentNode) frontCard.parentNode.removeChild(frontCard);
-    }, 320);
-
-    // Update depth attributes on remaining cards
-    state.cardElements.shift(); // remove front from array
-    state.cardElements.forEach((card, i) => {
-      card.dataset.depth = i;
-      card.style.transition = 'transform 0.35s var(--spring), opacity 0.35s var(--spring)';
-    });
-
-    // Check if we need to add a new back card
-    const nextNewQIdx = state.currentQuestion + 3;
-    if (nextNewQIdx < questions.length) {
-      const newCard = createCard(nextNewQIdx, 2);
-      stack.appendChild(newCard);
-      state.cardElements.push(newCard);
-    }
-
-    // Update current question
-    state.currentQuestion++;
-
-    // Attach listeners to new front card
-    if (state.cardElements.length > 0) {
-      const newFront = state.cardElements[0];
-      attachOptionListeners(newFront);
-    }
-
-    state.isAdvancing = false;
-
-    // Check if all answered
-    if (state.answeredCount >= questions.length) {
-      setTimeout(() => {
-        goToScreen3();
-      }, 400);
-    }
-  }, 310);
-}
-
-/* ============================================================
-   SCREEN 3 LOGIC
-   ============================================================ */
-
-// Particle system
-function launchParticles() {
-  const canvas = document.getElementById('particleCanvas');
+  const canvas = document.getElementById('s1Canvas');
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
+  canvas.width = 390;
+  canvas.height = 844;
 
-  // Set canvas size
-  canvas.width = canvas.offsetWidth;
-  canvas.height = 300;
+  const EMOJIS = ['💰','✨','⭐','💎','🪙','💵'];
+  const particles = Array.from({length: 22}, () => ({
+    x: Math.random() * 390,
+    y: Math.random() * 844,
+    vx: (Math.random() - 0.5) * 0.45,
+    vy: -(Math.random() * 0.7 + 0.15),
+    sz: Math.random() * 14 + 9,
+    em: EMOJIS[Math.floor(Math.random() * EMOJIS.length)],
+    al: Math.random() * 0.5 + 0.15,
+  }));
 
-  const colors = ['#01D676', '#FFC700', '#E87B2A', '#FFFFFF', '#A9A9CA'];
-  const particles = [];
-
-  // Create 60 particles from center-top area
-  for (let i = 0; i < 60; i++) {
-    const isRect = Math.random() > 0.5;
-    particles.push({
-      x: canvas.width / 2 + (Math.random() - 0.5) * 60,
-      y: 20,
-      vx: (Math.random() - 0.5) * 8,
-      vy: -(Math.random() * 8 + 2),
-      gravity: 0.25,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      alpha: 1,
-      fade: 0.008 + Math.random() * 0.015,
-      size: isRect ? null : (Math.random() * 5 + 3),
-      w: isRect ? (Math.random() * 8 + 4) : null,
-      h: isRect ? (Math.random() * 4 + 2) : null,
-      isRect,
-      rotation: Math.random() * Math.PI * 2,
-      rotSpeed: (Math.random() - 0.5) * 0.15
-    });
+  function drawS1() {
+    ctx.clearRect(0, 0, 390, 844);
+    for (const p of particles) {
+      ctx.save();
+      ctx.globalAlpha = p.al;
+      ctx.font = p.sz + 'px serif';
+      ctx.fillText(p.em, p.x, p.y);
+      ctx.restore();
+      p.x += p.vx; p.y += p.vy;
+      if (p.y < -20) { p.y = 864; p.x = Math.random() * 390; }
+      if (p.x < -20) p.x = 410;
+      if (p.x > 410) p.x = -20;
+    }
+    s1AnimFrame = requestAnimationFrame(drawS1);
   }
+
+  if (s1AnimFrame) cancelAnimationFrame(s1AnimFrame);
+  drawS1();
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 2 — PAYOUT COUNTER
+════════════════════════════════════════════════════════════ */
+function initS2() {
+  animateCount('s2PayoutNum', 80000, 124830, 1600, v => '€' + v.toLocaleString('en-US'));
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 4 — RING ANIMATION
+════════════════════════════════════════════════════════════ */
+function initS4() {
+  setTimeout(() => {
+    const ring = document.getElementById('s4RingFill');
+    if (ring) {
+      // r=70, circumference = 2*PI*70 ≈ 439.82
+      // 10% filled → offset = 439.82 * 0.9
+      ring.style.strokeDashoffset = '395.84'; // 90% offset = 10% filled
+    }
+  }, 350);
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 5 — PROGRESS BAR
+════════════════════════════════════════════════════════════ */
+function initS5() {
+  setTimeout(() => {
+    const fill = document.getElementById('s5ProgFill');
+    if (fill) fill.style.width = '10%';
+  }, 200);
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCREEN 6 — CELEBRATION
+════════════════════════════════════════════════════════════ */
+function initS6() {
+  // Animate earned amount
+  animateCount('s6EarnedAmt', 0, 50, 900, v => '€' + (v / 100).toFixed(2));
+  // XP bar
+  setTimeout(() => {
+    const xp = document.getElementById('s6XpFill');
+    if (xp) xp.style.width = '28%';
+  }, 500);
+  // Confetti
+  launchConfetti();
+}
+
+function launchConfetti() {
+  const canvas = document.getElementById('s6Canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = 390;
+  canvas.height = 844;
+
+  const COLORS = ['#8B5CF6','#34D399','#FBBF24','#F472B6','#60A5FA','#FFFFFF','#FB923C'];
+  const parts = Array.from({length: 110}, () => {
+    const isRect = Math.random() > 0.38;
+    return {
+      x: 195 + (Math.random() - 0.5) * 80,
+      y: 220,
+      vx: (Math.random() - 0.5) * 13,
+      vy: -(Math.random() * 15 + 5),
+      g: 0.32,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      al: 1,
+      fade: 0.005 + Math.random() * 0.01,
+      isRect,
+      sz: isRect ? null : (Math.random() * 6 + 3),
+      w: isRect ? (Math.random() * 11 + 5) : null,
+      h: isRect ? (Math.random() * 5 + 3) : null,
+      rot: Math.random() * Math.PI * 2,
+      rs: (Math.random() - 0.5) * 0.2,
+    };
+  });
 
   function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, 390, 844);
     let alive = false;
-
-    particles.forEach(p => {
-      if (p.alpha <= 0) return;
+    for (const p of parts) {
+      if (p.al <= 0) continue;
       alive = true;
-
-      p.x += p.vx;
-      p.vy += p.gravity;
-      p.y += p.vy;
-      p.alpha -= p.fade;
-      p.rotation += p.rotSpeed;
-
+      p.x += p.vx; p.vy += p.g; p.y += p.vy;
+      p.al -= p.fade; p.rot += p.rs;
       ctx.save();
-      ctx.globalAlpha = Math.max(0, p.alpha);
+      ctx.globalAlpha = Math.max(0, p.al);
       ctx.fillStyle = p.color;
       ctx.translate(p.x, p.y);
-      ctx.rotate(p.rotation);
-
+      ctx.rotate(p.rot);
       if (p.isRect) {
-        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
       } else {
         ctx.beginPath();
-        ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+        ctx.arc(0, 0, p.sz, 0, Math.PI*2);
         ctx.fill();
       }
-
       ctx.restore();
-    });
-
+    }
     if (alive) requestAnimationFrame(draw);
   }
-
   requestAnimationFrame(draw);
 }
 
-function initScreen3() {
-  // Animate the complete ring
+/* ════════════════════════════════════════════════════════════
+   SCREEN 7 — PROGRESS BAR
+════════════════════════════════════════════════════════════ */
+function initS7() {
   setTimeout(() => {
-    const ring = document.getElementById('s3Ring');
-    ring.style.strokeDashoffset = '0';
-  }, 100);
-
-  // Launch particles
-  launchParticles();
-
-  // Update cashout method
-  const iconCls = cashoutIconMap[state.selectedCashout] || 'ti-brand-paypal';
-  const cashoutChipIcon = document.getElementById('cashoutChipIcon');
-  cashoutChipIcon.innerHTML = `<i class="ti ${iconCls}"></i>`;
-  document.getElementById('cashoutChipMethod').textContent = state.selectedCashout;
-
-  const s3CashoutIcon = document.getElementById('s3CashoutIcon');
-  s3CashoutIcon.innerHTML = `<i class="ti ${iconCls}"></i>`;
-
-  // Update balance earned
-  const totalEarned = (state.balance / 100).toFixed(2);
-  document.getElementById('becAmount').textContent = '€' + totalEarned;
+    const bar = document.getElementById('s7BarInner');
+    if (bar) bar.style.width = '10%';
+  }, 300);
 }
 
-function goToScreen3() {
-  // Update cashout data before transition
-  const iconCls = cashoutIconMap[state.selectedCashout] || 'ti-brand-paypal';
-
-  goToScreen(3);
-
-  // Init screen 3 elements after transition starts
-  setTimeout(() => {
-    initScreen3();
-  }, 100);
-}
-
-/* ============================================================
-   TRANSITIONS
-   ============================================================ */
-function goToScreen(num) {
-  const prev = document.getElementById('screen' + state.currentScreen);
-  const next = document.getElementById('screen' + num);
-
-  prev.classList.remove('active');
-  prev.classList.add('exit-left');
-
-  next.classList.add('active');
-
-  state.currentScreen = num;
-
-  // Cleanup exit-left after transition
-  setTimeout(() => {
-    prev.classList.remove('exit-left');
-  }, 500);
-
-  // If going to screen 2, init card stack
-  if (num === 2) {
-    // Small delay to let animation start
-    setTimeout(() => {
-      initCardStack();
-    }, 50);
-  }
-}
-
-/* ============================================================
-   INIT
-   ============================================================ */
-function init() {
-  // Show screen 1
-  document.getElementById('screen1').classList.add('active');
-
-  // Init screen 1 animations
-  initLoopAnimation();
-  animateCounter();
-  initTicker();
-  initScreen1();
-
-  // Restart button
-  document.getElementById('restartBtn').addEventListener('click', () => {
-    location.reload();
+/* ════════════════════════════════════════════════════════════
+   INTERACTIONS
+════════════════════════════════════════════════════════════ */
+// Personalization cards
+document.querySelectorAll('.s3-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const id = card.dataset.interest;
+    if (interests.has(id)) { interests.delete(id); card.classList.remove('sel'); }
+    else { interests.add(id); card.classList.add('sel'); }
   });
+});
+
+// Method selection
+document.querySelectorAll('.s7-method').forEach(m => {
+  m.addEventListener('click', () => {
+    document.querySelectorAll('.s7-method').forEach(x => x.classList.remove('sel'));
+    m.classList.add('sel');
+  });
+});
+
+// Dashboard bottom nav tabs
+document.querySelectorAll('.s8-nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.s8-nav-item').forEach(x => x.classList.remove('on'));
+    item.classList.add('on');
+  });
+});
+
+/* ════════════════════════════════════════════════════════════
+   WIRE BUTTONS
+════════════════════════════════════════════════════════════ */
+function wireBtn(id, target) {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('click', () => goTo(target));
 }
 
-// Run on load
-document.addEventListener('DOMContentLoaded', init);
+// Back buttons
+document.querySelectorAll('.back-btn[data-goto]').forEach(btn => {
+  btn.addEventListener('click', () => goTo(parseInt(btn.dataset.goto)));
+});
+
+// Play buttons on screen 5
+document.querySelectorAll('.s5-play-btn').forEach(btn => {
+  btn.addEventListener('click', () => goTo(6));
+});
+
+/* ════════════════════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Build nav dots
+  const dotsEl = document.getElementById('navDots');
+  for (let i = 1; i <= TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === 1 ? ' on' : '');
+    d.title = 'Screen ' + i;
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  }
+
+  // Show screen 1
+  document.getElementById('s1').classList.add('active');
+  initS1();
+
+  // Wire CTAs
+  wireBtn('s1Cta', 2);
+  wireBtn('s2Cta', 3);
+  wireBtn('s3Cta', 4);
+  wireBtn('s4Cta', 5);
+  wireBtn('s5Cta', 6);
+  wireBtn('s6Cta', 7);
+  wireBtn('s7Cta', 8);
+
+  // Restart
+  document.getElementById('restartBtn').addEventListener('click', () => location.reload());
+});
 </script>
 </body>
 </html>
