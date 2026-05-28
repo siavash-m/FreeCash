@@ -3,754 +3,615 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Freecash — Onboarding</title>
+<title>Freecash — Achievement Unlocked</title>
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=poppins:400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.22.0/tabler-icons.min.css">
+
 <style>
-/* ──────────────────────────────────────────────────────────
+/* ─────────────────────────────────────────────────────────────
    TOKENS
-────────────────────────────────────────────────────────── */
-:root {
-  --bg:         #09091A;
-  --surface:    #111226;
-  --elevated:   #1A1A35;
+───────────────────────────────────────────────────────────── */
+:root{
+  --bg:           #08081A;
+  --surface:      #101024;
+  --elevated:     #181832;
+  --glass:        rgba(255,255,255,.05);
+  --glass-border: rgba(255,255,255,.09);
 
-  --purple:     #7C3AED;
-  --purple-dk:  #5B21B6;
-  --purple-lt:  #A78BFA;
-  --purple-glow:rgba(124,58,237,.40);
-  --purple-dim: rgba(124,58,237,.12);
+  --purple:       #7C3AED;
+  --purple-dk:    #5B21B6;
+  --purple-lt:    #A78BFA;
+  --purple-glow:  rgba(124,58,237,.42);
+  --purple-dim:   rgba(124,58,237,.13);
 
-  --green:      #34D399;
-  --green-glow: rgba(52,211,153,.35);
-  --green-dim:  rgba(52,211,153,.10);
+  --green:        #34D399;
+  --green-dk:     #059669;
+  --green-glow:   rgba(52,211,153,.38);
+  --green-dim:    rgba(52,211,153,.11);
 
-  --gold:       #FBBF24;
-  --gold-glow:  rgba(251,191,36,.30);
-  --gold-dim:   rgba(251,191,36,.10);
+  --gold:         #FBBF24;
+  --gold-dk:      #D97706;
+  --gold-glow:    rgba(251,191,36,.35);
+  --gold-dim:     rgba(251,191,36,.11);
 
-  --text:       #FFFFFF;
-  --text-sec:   #94A3B8;
-  --text-muted: #64748B;
+  --text:         #FFFFFF;
+  --text-sec:     #94A3B8;
+  --text-muted:   #64748B;
 
-  --border:     rgba(255,255,255,.07);
-  --border-hi:  rgba(255,255,255,.14);
+  --border:       rgba(255,255,255,.07);
+  --border-hi:    rgba(255,255,255,.13);
 
-  --ease-out:   cubic-bezier(.22,1,.36,1);
-  --spring:     cubic-bezier(.34,1.56,.64,1);
+  --ease-out:     cubic-bezier(.22,1,.36,1);
+  --spring:       cubic-bezier(.34,1.56,.64,1);
+  --ease-in-out:  cubic-bezier(.4,0,.2,1);
 }
 
-/* ──────────────────────────────────────────────────────────
+/* ─────────────────────────────────────────────────────────────
    RESET
-────────────────────────────────────────────────────────── */
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-
-html,body {
+───────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{
   height:100%;
   font-family:'Poppins',-apple-system,sans-serif;
-  background:#040410;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  background:#030310;
+  display:flex;align-items:center;justify-content:center;
   overflow:hidden;
 }
-
-body::before {
+body::before{
   content:'';
-  position:fixed; inset:0; pointer-events:none;
+  position:fixed;inset:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(124,58,237,.18) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 85% 85%, rgba(52,211,153,.08) 0%, transparent 55%);
+    radial-gradient(ellipse 70% 45% at 50% 0%,  rgba(124,58,237,.22) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 90%, rgba(52,211,153,.10) 0%,transparent 60%);
 }
 
-/* ──────────────────────────────────────────────────────────
+/* ─────────────────────────────────────────────────────────────
    PHONE FRAME
-────────────────────────────────────────────────────────── */
-.wrap { display:flex; flex-direction:column; align-items:center; gap:20px; }
-
-.phone {
-  width:390px; height:844px;
+───────────────────────────────────────────────────────────── */
+.wrap{display:flex;flex-direction:column;align-items:center;gap:18px;}
+.phone{
+  width:390px;height:844px;
   background:var(--bg);
-  border:2px solid rgba(124,58,237,.22);
+  border:2px solid rgba(124,58,237,.24);
   border-radius:52px;
   box-shadow:
-    0 0 0 8px #07071A,
-    0 0 0 10px rgba(124,58,237,.08),
+    0 0 0 8px #06061A,
+    0 0 0 10px rgba(124,58,237,.10),
     0 50px 100px rgba(0,0,0,.9),
-    0 0 80px rgba(124,58,237,.12);
-  overflow:hidden;
-  position:relative;
-  display:flex; flex-direction:column;
+    0 0 80px  rgba(124,58,237,.15);
+  overflow:hidden;position:relative;display:flex;flex-direction:column;
+}
+.notch{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:130px;height:34px;background:#03030F;
+  border-radius:0 0 22px 22px;z-index:200;
+}
+.status-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px 0;height:48px;position:relative;z-index:99;flex-shrink:0;
+}
+.st-time{font-size:14px;font-weight:700;color:var(--text);letter-spacing:.02em;}
+.st-icons{display:flex;align-items:center;gap:5px;color:var(--text);font-size:15px;}
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL CONTAINER
+───────────────────────────────────────────────────────────── */
+.scroll{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.scroll::-webkit-scrollbar{display:none;}
+
+/* ─────────────────────────────────────────────────────────────
+   CANVAS OVERLAYS (absolute, pointer-events:none)
+───────────────────────────────────────────────────────────── */
+#confettiCanvas,#coinCanvas{
+  position:absolute;inset:0;pointer-events:none;z-index:10;
 }
 
-.notch {
-  position:absolute; top:0; left:50%; transform:translateX(-50%);
-  width:130px; height:34px;
-  background:#04040F;
-  border-radius:0 0 22px 22px;
-  z-index:200;
+/* ─────────────────────────────────────────────────────────────
+   ANIMATION KEYFRAMES
+───────────────────────────────────────────────────────────── */
+@keyframes floatUp{
+  0%  {opacity:0;transform:translateY(20px) scale(.92);}
+  100%{opacity:1;transform:translateY(0)    scale(1);}
 }
-
-.status-bar {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 28px 0;
-  height:48px;
-  position:relative; z-index:99; flex-shrink:0;
+@keyframes scaleIn{
+  0%  {opacity:0;transform:scale(.7) rotate(-15deg);}
+  70% {opacity:1;transform:scale(1.12) rotate(3deg);}
+  100%{          transform:scale(1)   rotate(0deg);}
 }
-.st-time { font-size:14px; font-weight:700; color:var(--text); letter-spacing:.02em; }
-.st-icons { display:flex; align-items:center; gap:5px; color:var(--text); font-size:15px; }
-
-/* ──────────────────────────────────────────────────────────
-   SCREEN SYSTEM
-────────────────────────────────────────────────────────── */
-.screens { flex:1; position:relative; overflow:hidden; }
-
-.screen {
-  position:absolute; inset:0;
-  overflow-y:auto; overflow-x:hidden; scrollbar-width:none;
-  opacity:0; transform:translateX(100%); pointer-events:none;
-  transition:opacity .44s var(--ease-out), transform .44s var(--ease-out);
+@keyframes checkPop{
+  0%  {transform:scale(0) rotate(-25deg);opacity:0;}
+  65% {transform:scale(1.2) rotate(5deg);opacity:1;}
+  100%{transform:scale(1)  rotate(0deg);opacity:1;}
 }
-.screen::-webkit-scrollbar { display:none; }
-.screen.active  { opacity:1; transform:translateX(0);    pointer-events:all; }
-.screen.out-left{ opacity:0; transform:translateX(-36px); pointer-events:none; }
-
-/* ──────────────────────────────────────────────────────────
-   SHARED COMPONENTS
-────────────────────────────────────────────────────────── */
-.btn {
-  width:100%; border:none; border-radius:16px;
-  padding:17px 24px; cursor:pointer;
-  font-family:'Poppins',sans-serif; font-size:16px; font-weight:700;
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  position:relative; overflow:hidden;
-  transition:transform .15s ease, box-shadow .2s ease, opacity .2s ease;
+@keyframes breathe{
+  0%,100%{opacity:.55;transform:scale(1);}
+  50%    {opacity:1;  transform:scale(1.14);}
 }
-.btn::after {
-  content:'';
-  position:absolute; inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.14) 0%,transparent 55%);
-  pointer-events:none;
+@keyframes breatheXY{
+  0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(1);}
+  50%    {opacity:.9; transform:translate(-50%,-50%) scale(1.12);}
 }
-.btn-primary {
-  background:linear-gradient(135deg,var(--purple-dk),var(--purple),var(--purple-lt));
-  color:#fff;
-  box-shadow:0 8px 32px var(--purple-glow);
-  letter-spacing:.01em;
+@keyframes ringGlow{
+  0%,100%{filter:drop-shadow(0 0 10px rgba(52,211,153,.5));}
+  50%    {filter:drop-shadow(0 0 22px rgba(52,211,153,.85));}
 }
-.btn-primary:active { transform:scale(.97); box-shadow:0 4px 16px var(--purple-glow); }
-.btn-primary.disabled {
-  opacity:.38; pointer-events:none;
-  box-shadow:0 4px 12px rgba(124,58,237,.2);
+@keyframes pulseDot{
+  0%,100%{box-shadow:0 0 0 0   var(--purple-glow),0 0 8px  var(--purple-glow);}
+  50%    {box-shadow:0 0 0 6px transparent,       0 0 16px var(--purple-glow);}
 }
-.btn-ghost {
-  background:transparent;
-  color:var(--text-sec);
-  border:1.5px solid var(--border-hi);
+@keyframes shimmerLine{
+  0%  {background-position:-300px 0;}
+  100%{background-position: 300px 0;}
 }
-.btn-ghost:active { transform:scale(.97); }
-
-.btn i { font-size:20px; }
-
-/* Back header row */
-.hdr {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:10px 20px 4px; flex-shrink:0;
+@keyframes cardEntrance{
+  0%  {opacity:0;transform:translateY(24px) scale(.97);}
+  100%{opacity:1;transform:translateY(0)    scale(1);}
 }
-.back-btn {
-  width:36px; height:36px; border-radius:10px;
-  background:rgba(255,255,255,.05); border:1px solid var(--border);
-  display:flex; align-items:center; justify-content:center;
-  cursor:pointer; color:var(--text-sec); font-size:18px;
-  transition:background .2s;
+@keyframes ctaGlow{
+  0%,100%{box-shadow:0 8px 32px var(--purple-glow),0 0 0 0 transparent;}
+  50%    {box-shadow:0 8px 42px var(--purple-glow),0 0 20px rgba(167,139,250,.2);}
 }
-.back-btn:active { background:rgba(255,255,255,.1); }
-.step-lbl {
-  font-size:11px; font-weight:700; letter-spacing:.1em;
-  text-transform:uppercase; color:var(--text-muted);
+@keyframes badgePop{
+  0%  {transform:scale(0);opacity:0;}
+  70% {transform:scale(1.15);opacity:1;}
+  100%{transform:scale(1);}
 }
-.spacer { width:36px; }
-
-/* Balance earned pill */
-.bal-pill {
-  display:inline-flex; align-items:center; gap:6px;
-  background:var(--green-dim);
-  border:1px solid rgba(52,211,153,.22);
-  border-radius:100px; padding:5px 12px;
-  font-size:12px; font-weight:700; color:var(--green);
-  transition:background .3s, color .3s;
-}
-.bal-pill i { font-size:14px; }
-
-/* ──────────────────────────────────────────────────────────
-   FLOATING REWARD POPUP
-────────────────────────────────────────────────────────── */
-.reward-popup {
-  position:fixed;
-  z-index:9999;
-  background:linear-gradient(135deg,var(--purple-dk),var(--purple));
-  color:#fff;
-  font-family:'Poppins',sans-serif;
-  font-size:13px; font-weight:700;
-  padding:8px 16px; border-radius:100px;
-  pointer-events:none;
-  opacity:0;
-  white-space:nowrap;
-  box-shadow:0 4px 24px var(--purple-glow);
-  transform:translateX(-50%) translateY(0px);
-  will-change:transform,opacity;
-}
-.reward-popup.fly {
-  animation:rewardFly 1.1s var(--ease-out) forwards;
-}
-@keyframes rewardFly {
-  0%   { opacity:1; transform:translateX(-50%) translateY(0px)   scale(1);   }
-  25%  { opacity:1; transform:translateX(-50%) translateY(-24px)  scale(1.06);}
-  100% { opacity:0; transform:translateX(-50%) translateY(-72px)  scale(.9);  }
-}
-
-/* ──────────────────────────────────────────────────────────
-   KEYFRAMES
-────────────────────────────────────────────────────────── */
-@keyframes breathe {
-  0%,100% { opacity:.55; transform:scale(1); }
-  50%      { opacity:1;   transform:scale(1.12); }
-}
-@keyframes pulseDot {
-  0%,100% { transform:scale(1);   box-shadow:0 0 8px var(--green-glow); }
-  50%      { transform:scale(1.3); box-shadow:0 0 18px var(--green-glow); }
-}
-@keyframes slideUp {
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-@keyframes scaleIn {
-  from { opacity:0; transform:scale(.84); }
-  to   { opacity:1; transform:scale(1); }
-}
-@keyframes checkPop {
-  0%  { transform:scale(0) rotate(-20deg); }
-  70% { transform:scale(1.2) rotate(5deg); }
-  100%{ transform:scale(1) rotate(0deg); }
-}
-@keyframes ringPulse {
-  0%,100% { transform:scale(1);   opacity:.5; }
-  50%      { transform:scale(1.1); opacity:1; }
-}
-@keyframes coinBounce {
-  0%   { transform:scale(0) rotate(-20deg); opacity:0; }
-  65%  { transform:scale(1.12) rotate(4deg); opacity:1; }
-  100% { transform:scale(1) rotate(0deg);   opacity:1; }
-}
-@keyframes barFill {
-  from { width:0%; }
-}
-@keyframes countUp {
-  from { transform:translateY(4px); opacity:0; }
-  to   { transform:translateY(0);   opacity:1; }
+@keyframes countPop{
+  0%  {transform:scale(.8);opacity:0;}
+  100%{transform:scale(1); opacity:1;}
 }
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;}
 }
 
-/* ══════════════════════════════════════════════════════════
-   SCREEN 1 — TRUST + PATH PREVIEW
-══════════════════════════════════════════════════════════ */
-#s1 { display:flex; flex-direction:column; padding:0 22px 36px; position:relative; }
+/* ─────────────────────────────────────────────────────────────
+   SEQUENTIAL REVEAL UTILITY
+───────────────────────────────────────────────────────────── */
+.anim{opacity:0;}
+.anim.in{animation:floatUp .55s var(--ease-out) both;}
+
+/* ─────────────────────────────────────────────────────────────
+   CELEBRATION ZONE
+───────────────────────────────────────────────────────────── */
+.celebration-zone{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:12px;padding-bottom:8px;
+  min-height:220px;
+  overflow:hidden;
+}
 
 /* ambient glow blobs */
-.s1-blob-a {
-  position:absolute; width:500px; height:400px; top:-160px; left:-80px;
-  background:radial-gradient(circle, rgba(124,58,237,.22) 0%, transparent 65%);
-  pointer-events:none; z-index:0;
-  animation:breathe 7s ease-in-out infinite;
+.blob{position:absolute;border-radius:50%;pointer-events:none;}
+.blob-purple{
+  width:340px;height:280px;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(124,58,237,.28) 0%,transparent 65%);
+  animation:breatheXY 5s ease-in-out infinite;
 }
-.s1-blob-b {
-  position:absolute; width:320px; height:260px; bottom:40px; right:-80px;
-  background:radial-gradient(circle, rgba(52,211,153,.12) 0%, transparent 65%);
-  pointer-events:none; z-index:0;
-  animation:breathe 7s ease-in-out infinite 3.5s;
-}
-.s1-inner { position:relative; z-index:1; display:flex; flex-direction:column; gap:0; }
-
-/* live ticker */
-.s1-ticker {
-  margin-top:8px; margin-bottom:18px;
-  display:flex; align-items:center; justify-content:center;
-}
-.ticker-pill {
-  display:flex; align-items:center; gap:8px;
-  background:rgba(52,211,153,.07);
-  border:1px solid rgba(52,211,153,.22);
-  border-radius:100px; padding:6px 16px;
-}
-.live-dot {
-  width:7px; height:7px; border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 8px var(--green-glow);
-  flex-shrink:0;
-  animation:pulseDot 2s ease-in-out infinite;
-}
-.ticker-lbl { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--green); }
-.ticker-num { font-size:13px; font-weight:800; color:var(--text); font-variant-numeric:tabular-nums; }
-
-/* headline */
-.s1-headline {
-  font-size:30px; font-weight:900; color:var(--text);
-  line-height:1.18; letter-spacing:-.03em;
-  margin-bottom:18px;
-}
-.s1-headline .gr {
-  background:linear-gradient(90deg,var(--purple-lt),#C4B5FD);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+.blob-green{
+  width:220px;height:180px;
+  bottom:-40px;left:50%;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(52,211,153,.18) 0%,transparent 65%);
+  animation:breathe 5s ease-in-out infinite 2.5s;
 }
 
-/* stats row */
-.s1-stats {
-  display:flex; gap:8px; margin-bottom:18px;
+/* ring wrap */
+.ring-wrap{
+  position:relative;
+  width:164px;height:164px;
+  z-index:2;
 }
-.s1-stat {
-  flex:1; background:rgba(255,255,255,.04);
-  border:1px solid var(--border); border-radius:16px;
-  padding:12px 8px; display:flex; flex-direction:column; align-items:center; gap:3px;
+.ring-svg{
+  width:164px;height:164px;
+  transform:rotate(-90deg);
 }
-.s1-stat-num {
-  font-size:16px; font-weight:900; color:var(--text);
-  letter-spacing:-.02em; line-height:1;
+.ring-bg{
+  fill:none;stroke:rgba(255,255,255,.06);stroke-width:10;
 }
-.s1-stat-num.green { color:var(--green); }
-.s1-stat-num.gold  { color:var(--gold); }
-.s1-stat-num.purple{ color:var(--purple-lt); }
-.s1-stat-lbl { font-size:10px; font-weight:600; color:var(--text-muted); text-align:center; line-height:1.3; }
+.ring-track{
+  fill:none;stroke:rgba(255,255,255,.04);stroke-width:10;
+}
+.ring-fill{
+  fill:none;stroke:url(#ringGradient);stroke-width:10;
+  stroke-linecap:round;
+  stroke-dasharray:408.41;
+  stroke-dashoffset:408.41;
+  transition:stroke-dashoffset 1.4s var(--ease-out);
+  filter:drop-shadow(0 0 8px rgba(52,211,153,.5));
+}
+.ring-fill.complete{
+  stroke-dashoffset:0;
+  animation:ringGlow 2.5s ease-in-out infinite 1.5s;
+}
 
-/* avatars */
-.s1-social {
-  display:flex; align-items:center; gap:12px; margin-bottom:20px;
+/* ring center */
+.ring-center{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1px;z-index:3;
 }
-.av-stack { display:flex; }
-.av {
-  width:34px; height:34px; border-radius:50%;
-  border:2.5px solid var(--bg);
-  display:flex; align-items:center; justify-content:center;
-  font-size:15px; margin-left:-10px;
+.ring-amt{
+  font-size:28px;font-weight:900;color:var(--text);
+  letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums;
 }
-.av:first-child { margin-left:0; }
-.av1 { background:linear-gradient(135deg,#5B21B6,#A78BFA); }
-.av2 { background:linear-gradient(135deg,#065F46,#34D399); }
-.av3 { background:linear-gradient(135deg,#92400E,#FBBF24); }
-.av4 { background:linear-gradient(135deg,#1E3A5F,#60A5FA); }
-.social-txt { font-size:12px; color:var(--text-sec); line-height:1.5; }
-.social-txt strong { color:var(--text); font-weight:700; display:block; }
+.ring-goal{
+  font-size:10px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-muted);
+}
 
-/* checklist */
-.s1-checklist {
+/* completed badge on ring */
+.ring-badge{
+  position:absolute;
+  bottom:-6px;left:50%;transform:translateX(-50%) scale(0);
+  background:linear-gradient(135deg,var(--green-dk),var(--green));
+  border:2px solid var(--bg);
+  border-radius:100px;
+  padding:4px 10px;
+  display:flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:700;color:#fff;
+  white-space:nowrap;
+  box-shadow:0 4px 16px var(--green-glow);
+  transition:transform .4s var(--spring);
+}
+.ring-badge.show{transform:translateX(-50%) scale(1);}
+.ring-badge i{font-size:13px;}
+
+/* ─────────────────────────────────────────────────────────────
+   HEADLINE ZONE
+───────────────────────────────────────────────────────────── */
+.headline-zone{
+  padding:0 24px;
+  display:flex;flex-direction:column;align-items:center;
+  gap:8px;text-align:center;
+  margin-top:20px;
+  position:relative;z-index:2;
+}
+.headline{
+  font-size:26px;font-weight:900;color:var(--text);
+  line-height:1.18;letter-spacing:-.03em;
+}
+.headline .grad{
+  background:linear-gradient(90deg,var(--purple-lt),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.subheadline{
+  font-size:13px;color:var(--text-sec);line-height:1.58;
+  max-width:310px;
+}
+
+/* trust pills row */
+.trust-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:12px;flex-wrap:wrap;
+  margin-top:2px;
+}
+.trust-pill{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border-hi);
+  border-radius:100px;
+  padding:5px 11px;
+  font-size:11px;font-weight:600;color:var(--text-sec);
+  white-space:nowrap;
+}
+.trust-pill i{font-size:13px;}
+.trust-pill.green i{color:var(--green);}
+.trust-pill.gold  i{color:var(--gold);}
+.trust-pill.purple i{color:var(--purple-lt);}
+
+/* ─────────────────────────────────────────────────────────────
+   PROGRESSION SECTION
+───────────────────────────────────────────────────────────── */
+.progression{
+  margin:18px 24px 0;
   background:rgba(255,255,255,.03);
   border:1px solid var(--border);
-  border-radius:18px; padding:16px;
-  margin-bottom:22px;
-  display:flex; flex-direction:column; gap:0;
+  border-radius:18px;
+  padding:14px 16px;
+  position:relative;overflow:hidden;
 }
-.checklist-title {
-  font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--text-muted); margin-bottom:10px;
-  display:flex; align-items:center; gap:6px;
-}
-.checklist-title i { font-size:13px; color:var(--purple-lt); }
-
-.cl-step {
-  display:flex; align-items:center; gap:12px;
-  padding:9px 0;
-  border-bottom:1px solid var(--border);
-}
-.cl-step:last-child { border-bottom:none; padding-bottom:0; }
-.cl-step:first-child { padding-top:0; }
-
-.cl-dot {
-  width:22px; height:22px; border-radius:50%; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  border:2px solid var(--border-hi);
-  font-size:11px; color:var(--text-muted);
-  transition:all .3s;
-}
-.cl-dot.done  { background:var(--green); border-color:var(--green); box-shadow:0 0 12px var(--green-glow); }
-.cl-dot.done i { font-size:13px; color:#fff; }
-.cl-dot.current { border-color:var(--purple); box-shadow:0 0 10px var(--purple-glow); }
-.cl-dot.current::before {
+.progression::before{
   content:'';
-  width:8px; height:8px; border-radius:50%;
-  background:var(--purple);
-  box-shadow:0 0 6px var(--purple-glow);
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(124,58,237,.5),transparent);
 }
+.prog-header{
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:12px;
+  display:flex;align-items:center;gap:6px;
+}
+.prog-header i{font-size:13px;color:var(--purple-lt);}
 
-.cl-label { font-size:13px; font-weight:600; color:var(--text-sec); line-height:1; }
-.cl-step.done .cl-label  { color:var(--text); }
-.cl-step.current .cl-label { color:var(--text); }
+/* horizontal step track */
+.prog-track{
+  display:flex;align-items:flex-start;
+  position:relative;
+}
+.prog-step{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  flex:1;position:relative;z-index:1;
+}
+.prog-dot{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+  transition:all .3s;
+  position:relative;flex-shrink:0;
+}
+.prog-dot.done{
+  background:var(--green);
+  box-shadow:0 0 16px var(--green-glow);
+  color:#fff;
+}
+.prog-dot.done i{font-size:14px;animation:checkPop .5s var(--spring) both;}
+.prog-dot.current{
+  background:var(--purple-dim);
+  border:2px solid var(--purple);
+  color:var(--purple-lt);
+  animation:pulseDot 2s ease-in-out infinite;
+}
+.prog-dot.current::after{
+  content:'';
+  position:absolute;inset:-5px;border-radius:50%;
+  border:2px solid rgba(124,58,237,.3);
+  animation:pulseDot 2s ease-in-out infinite .5s;
+}
+.prog-dot.upcoming{
+  background:rgba(255,255,255,.04);
+  border:2px solid var(--border-hi);
+  color:var(--text-muted);
+  font-size:12px;
+}
+.prog-info{display:flex;flex-direction:column;align-items:center;gap:1px;}
+.prog-label{
+  font-size:10px;font-weight:700;color:var(--text-sec);
+  text-align:center;line-height:1.3;
+}
+.prog-step.done .prog-label{color:var(--text);}
+.prog-step.current .prog-label{color:var(--purple-lt);}
+.prog-value{
+  font-size:10px;font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+.prog-value.green{color:var(--green);}
+.prog-value.gold {color:var(--gold);}
+.prog-value.muted{color:var(--text-muted);}
 
-.cl-connector {
-  width:2px; height:8px; background:var(--border);
-  margin-left:10px; /* align with center of dot */
+/* connector lines */
+.prog-line{
+  flex:1;height:2px;margin-top:13px;border-radius:1px;
+  background:var(--border-hi);
+  position:relative;overflow:hidden;
+}
+.prog-line.done::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--green),rgba(52,211,153,.6));
   border-radius:1px;
 }
-
-/* trust row */
-.s1-trust {
-  display:flex; align-items:center; justify-content:center; gap:16px;
-  margin-top:12px;
-}
-.trust-item {
-  display:flex; align-items:center; gap:5px;
-  font-size:11px; color:var(--text-muted);
-}
-.trust-item i { font-size:13px; color:var(--green); }
-
-/* ══════════════════════════════════════════════════════════
-   SCREENS 2 & 3 — PERSONALIZATION
-══════════════════════════════════════════════════════════ */
-#s2, #s3 { display:flex; flex-direction:column; }
-
-.q-inner { padding:0 22px 36px; display:flex; flex-direction:column; flex:1; }
-
-/* step progress pills */
-.q-step-row {
-  display:flex; align-items:center; gap:6px;
-  margin-bottom:22px;
-}
-.q-step-pip {
-  height:4px; border-radius:2px;
-  background:var(--border-hi);
-  transition:background .3s, flex .3s;
-}
-.q-step-pip.done   { background:var(--green); flex:1; }
-.q-step-pip.active { background:var(--purple); flex:2; }
-.q-step-pip.upcoming { flex:1; }
-
-/* question headline */
-.q-headline {
-  font-size:24px; font-weight:900; color:var(--text);
-  line-height:1.22; letter-spacing:-.025em;
-  margin-bottom:6px;
-}
-.q-sub {
-  font-size:13px; color:var(--text-sec);
-  margin-bottom:20px; line-height:1.5;
+.prog-line.active::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--green),var(--purple));
+  border-radius:1px;
+  background-size:200% 100%;
+  animation:shimmerLine 1.8s linear infinite;
 }
 
-/* option cards */
-.opt-list { display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+/* ─────────────────────────────────────────────────────────────
+   GAME CARD
+───────────────────────────────────────────────────────────── */
+.game-card-wrap{
+  margin:16px 24px 0;
+  position:relative;
+}
+.rec-label{
+  position:absolute;top:-11px;left:16px;
+  background:linear-gradient(135deg,var(--gold-dk),var(--gold));
+  color:#000;font-size:10px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 12px;border-radius:100px;
+  display:flex;align-items:center;gap:4px;
+  box-shadow:0 4px 16px var(--gold-glow);
+  animation:badgePop .5s var(--spring) 2s both;
+  z-index:3;
+}
+.rec-label i{font-size:11px;}
 
-.opt-card {
-  display:flex; align-items:center; gap:14px;
-  background:rgba(255,255,255,.04);
-  border:1.5px solid var(--border);
-  border-radius:16px; padding:14px 16px;
-  cursor:pointer; -webkit-tap-highlight-color:transparent;
-  transition:background .2s, border-color .2s, transform .15s var(--spring), box-shadow .2s;
-  position:relative; overflow:hidden;
+.game-card{
+  background:linear-gradient(150deg,#0E0128,#1D0760,#0B0133);
+  border:1px solid rgba(124,58,237,.38);
+  border-radius:22px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 12px 40px rgba(0,0,0,.6),0 0 0 1px rgba(124,58,237,.12);
+  animation:cardEntrance .6s var(--ease-out) 1.8s both;
 }
-.opt-card::before {
-  content:''; position:absolute; inset:0;
-  background:radial-gradient(ellipse at 30% 50%, rgba(124,58,237,.1), transparent);
-  opacity:0; transition:opacity .2s;
+/* top shine line */
+.game-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(167,139,250,.8),transparent);
 }
-.opt-card:active { transform:scale(.97); }
-.opt-card.sel {
-  border-color:var(--purple);
-  background:var(--purple-dim);
-  box-shadow:0 0 24px var(--purple-glow), inset 0 0 20px rgba(124,58,237,.05);
-  transform:scale(1.02);
-}
-.opt-card.sel::before { opacity:1; }
-
-.opt-icon {
-  width:46px; height:46px; border-radius:14px; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  font-size:22px;
-  background:rgba(255,255,255,.06);
-  transition:background .2s;
-}
-.opt-card.sel .opt-icon { background:rgba(124,58,237,.2); }
-
-.opt-text { flex:1; }
-.opt-name { font-size:14px; font-weight:700; color:var(--text); margin-bottom:1px; }
-.opt-desc { font-size:11px; color:var(--text-muted); }
-.opt-card.sel .opt-desc { color:var(--purple-lt); }
-
-.opt-radio {
-  width:20px; height:20px; border-radius:50%; flex-shrink:0;
-  border:2px solid var(--border-hi);
-  display:flex; align-items:center; justify-content:center;
-  transition:border-color .2s, background .2s;
-}
-.opt-card.sel .opt-radio { border-color:var(--purple); background:var(--purple); }
-.opt-radio-dot {
-  width:8px; height:8px; border-radius:50%; background:#fff;
-  opacity:0; transform:scale(0);
-  transition:opacity .2s, transform .2s var(--spring);
-}
-.opt-card.sel .opt-radio-dot { opacity:1; transform:scale(1); }
-
-/* reward feedback line */
-.reward-line {
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  padding:10px 14px; border-radius:12px;
-  background:var(--purple-dim);
-  border:1px solid rgba(124,58,237,.2);
-  margin-bottom:16px;
-  opacity:0; transform:translateY(6px);
-  transition:opacity .3s, transform .3s var(--ease-out);
-}
-.reward-line.show { opacity:1; transform:translateY(0); }
-.reward-line i { font-size:16px; color:var(--gold); }
-.reward-line span { font-size:13px; font-weight:700; color:var(--text); }
-.reward-line span em { font-style:normal; color:var(--green); }
-
-/* ══════════════════════════════════════════════════════════
-   SCREEN 4 — FIRST TASK
-══════════════════════════════════════════════════════════ */
-#s4 { display:flex; flex-direction:column; padding:0 22px 36px; }
-
-/* progress bar */
-.goal-bar-wrap {
-  margin-top:12px; margin-bottom:20px;
-  padding:14px 16px;
-  background:rgba(52,211,153,.06);
-  border:1px solid rgba(52,211,153,.16);
-  border-radius:16px;
-}
-.goal-bar-top {
-  display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;
-}
-.goal-bar-lbl {
-  font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-  color:var(--green); display:flex; align-items:center; gap:6px;
-}
-.goal-bar-amt { font-size:13px; font-weight:700; color:var(--text); }
-.goal-bar-outer {
-  width:100%; height:6px; background:rgba(255,255,255,.08);
-  border-radius:3px; overflow:hidden;
-}
-.goal-bar-inner {
-  height:100%; border-radius:3px;
-  background:linear-gradient(90deg,var(--green),#A7F3D0);
-  box-shadow:0 0 10px var(--green-glow);
-  transition:width 1s var(--ease-out);
-}
-.goal-bar-labels {
-  display:flex; justify-content:space-between; margin-top:5px;
-}
-.goal-bar-txt { font-size:10px; color:var(--text-muted); }
-
-/* headline */
-.s4-headline {
-  font-size:24px; font-weight:900; color:var(--text);
-  letter-spacing:-.025em; margin-bottom:5px; line-height:1.2;
-}
-.s4-sub {
-  font-size:13px; color:var(--text-sec);
-  display:flex; align-items:center; gap:6px;
-  margin-bottom:20px; line-height:1.4;
-}
-.s4-sub i { color:var(--green); font-size:15px; flex-shrink:0; }
-
-/* offer card */
-.offer-card {
-  background:linear-gradient(145deg,#160530,#22085E,#160530);
-  border:1px solid rgba(124,58,237,.32);
-  border-radius:22px; padding:20px;
-  position:relative; overflow:hidden;
-  margin-bottom:14px;
-}
-.offer-card::before {
-  content:''; position:absolute;
-  top:0; left:0; right:0; height:1px;
-  background:linear-gradient(90deg,transparent,rgba(167,139,250,.7),transparent);
-}
-.offer-card::after {
-  content:''; position:absolute;
-  top:-60px; right:-60px; width:180px; height:180px;
+/* inner glow blob */
+.game-card::after{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;
   background:radial-gradient(circle,rgba(124,58,237,.35) 0%,transparent 65%);
   pointer-events:none;
 }
 
-.offer-top {
-  display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; position:relative; z-index:1;
+/* artwork + info top half */
+.game-card-top{
+  display:flex;align-items:flex-start;
+  gap:14px;padding:20px 18px 16px;
+  position:relative;z-index:1;
 }
-.offer-thumb {
-  width:64px; height:64px; border-radius:16px; flex-shrink:0;
-  background:linear-gradient(145deg,#2A0A5E,#5B21B6);
-  display:flex; align-items:center; justify-content:center;
-  font-size:30px;
-  box-shadow:0 0 20px rgba(124,58,237,.4);
+.game-artwork{
+  width:72px;height:72px;border-radius:16px;flex-shrink:0;
+  background:linear-gradient(145deg,#200060,#3D0B9E,#5B21B6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;
+  box-shadow:0 6px 24px rgba(91,33,182,.6),0 0 0 1px rgba(167,139,250,.2);
+  position:relative;overflow:hidden;
 }
-.offer-info { flex:1; min-width:0; }
-.offer-tags {
-  display:flex; gap:6px; flex-wrap:wrap; margin-bottom:5px;
+.game-artwork::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15) 0%,transparent 50%);
 }
-.tag {
-  border-radius:6px; padding:3px 9px;
-  font-size:10px; font-weight:700; letter-spacing:.04em;
+.game-artwork-detail{
+  position:absolute;bottom:0;left:0;right:0;height:28px;
+  background:linear-gradient(0deg,rgba(91,33,182,.8),transparent);
 }
-.tag-easy  { background:var(--green-dim); color:var(--green); }
-.tag-fast  { background:rgba(251,191,36,.12); color:var(--gold); }
-.tag-top   { background:rgba(244,114,182,.12); color:#F472B6; }
-.offer-name { font-size:15px; font-weight:800; color:var(--text); margin-bottom:2px; }
-.offer-task { font-size:12px; color:rgba(167,139,250,.8); }
+.game-info-col{flex:1;min-width:0;}
+.game-name{
+  font-size:16px;font-weight:800;color:var(--text);
+  margin-bottom:3px;letter-spacing:-.01em;
+}
+.game-genre{
+  font-size:11px;color:rgba(167,139,250,.7);
+  margin-bottom:9px;
+}
+.game-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.g-tag{
+  border-radius:7px;padding:3px 9px;
+  font-size:10px;font-weight:700;letter-spacing:.03em;
+}
+.g-tag-easy{background:rgba(52,211,153,.12);color:var(--green);}
+.g-tag-fast{background:rgba(251,191,36,.12);color:var(--gold);}
 
-.offer-reward-row {
-  display:flex; align-items:center; justify-content:space-between;
-  padding-top:14px;
+/* reward divider row */
+.game-reward-row{
+  display:flex;align-items:center;
+  margin:0 18px;padding:12px 0;
   border-top:1px solid rgba(255,255,255,.07);
-  position:relative; z-index:1;
+  position:relative;z-index:1;
 }
-.offer-payout {
-  display:flex; flex-direction:column; gap:1px;
+.reward-col{flex:1;}
+.reward-lbl{
+  font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(167,139,250,.55);margin-bottom:3px;
 }
-.offer-payout-lbl {
-  font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-  color:rgba(167,139,250,.6);
-}
-.offer-payout-amt {
-  font-size:30px; font-weight:900; color:var(--text);
-  letter-spacing:-.03em; line-height:1;
-}
-.offer-meta { display:flex; flex-direction:column; align-items:flex-end; gap:5px; }
-.offer-meta-row {
-  display:flex; align-items:center; gap:5px;
-  font-size:12px; color:rgba(167,139,250,.7);
-}
-.offer-meta-row i { font-size:13px; }
-
-/* view more */
-.view-more {
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  padding:12px;
-  background:rgba(255,255,255,.03);
-  border:1px solid var(--border);
-  border-radius:14px;
-  margin-bottom:18px;
-  cursor:pointer;
-  transition:background .2s, border-color .2s;
-}
-.view-more:active { background:rgba(255,255,255,.06); }
-.view-more span { font-size:13px; font-weight:600; color:var(--text-sec); }
-.view-more i { font-size:16px; color:var(--text-muted); }
-
-/* ══════════════════════════════════════════════════════════
-   SCREEN 5 — CELEBRATION
-══════════════════════════════════════════════════════════ */
-#s5 { display:flex; flex-direction:column; align-items:center; padding:0 22px 40px; position:relative; overflow:hidden; }
-#s5Canvas { position:absolute; inset:0; pointer-events:none; z-index:0; }
-.s5-inner { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; width:100%; }
-
-.s5-glow-ring {
-  width:176px; height:176px; border-radius:50%;
-  background:radial-gradient(circle,rgba(52,211,153,.25) 0%,rgba(52,211,153,.07) 45%,transparent 70%);
-  display:flex; align-items:center; justify-content:center;
-  margin:24px 0 14px; position:relative;
-}
-.s5-glow-ring::before {
-  content:''; position:absolute; inset:20px; border-radius:50%;
-  border:2px solid rgba(52,211,153,.38);
-  animation:ringPulse 2s ease-in-out infinite;
-}
-.s5-glow-ring::after {
-  content:''; position:absolute; inset:36px; border-radius:50%;
-  border:1.5px solid rgba(52,211,153,.18);
-  animation:ringPulse 2s ease-in-out infinite .5s;
-}
-.s5-coin { font-size:64px; animation:coinBounce .7s var(--spring) .1s both; }
-
-.s5-earned-lbl {
-  font-size:11px; font-weight:700; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--green); margin-bottom:3px;
-}
-.s5-earned-amt {
-  font-size:56px; font-weight:900; color:var(--text);
-  letter-spacing:-.05em; line-height:1;
+.reward-amt{
+  font-size:32px;font-weight:900;color:var(--text);
+  letter-spacing:-.04em;line-height:1;
   font-variant-numeric:tabular-nums;
-  animation:countUp .5s var(--ease-out) .4s both;
 }
-.s5-sub {
-  font-size:14px; color:var(--text-sec);
-  text-align:center; margin:8px 0 22px; line-height:1.5;
+.reward-amt span{color:var(--gold);}
+.game-meta-col{
+  display:flex;flex-direction:column;align-items:flex-end;gap:6px;
 }
-.s5-sub strong { color:var(--purple-lt); font-weight:700; }
+.meta-item{
+  display:flex;align-items:center;gap:5px;
+  font-size:11px;color:rgba(167,139,250,.65);
+}
+.meta-item i{font-size:13px;}
 
-/* cashout progress */
-.s5-progress {
-  width:100%;
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--border);
-  border-radius:16px; padding:14px 16px;
-  margin-bottom:14px;
+/* card CTA */
+.card-cta-row{
+  padding:14px 18px 18px;
+  position:relative;z-index:1;
 }
-.s5-prog-hdr {
-  display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;
+.card-cta{
+  width:100%;border:none;border-radius:14px;
+  padding:14px;cursor:pointer;
+  font-family:'Poppins',sans-serif;
+  font-size:14px;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--purple-dk),var(--purple),var(--purple-lt));
+  box-shadow:0 6px 24px var(--purple-glow);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  position:relative;overflow:hidden;
+  transition:transform .15s ease,box-shadow .2s ease;
+  letter-spacing:.01em;
 }
-.s5-prog-lbl {
-  font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-  color:var(--text-muted); display:flex; align-items:center; gap:6px;
+.card-cta::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.14) 0%,transparent 55%);
+  pointer-events:none;
 }
-.s5-prog-lbl i { color:var(--gold); }
-.s5-prog-pct { font-size:12px; font-weight:700; color:var(--green); }
-.s5-prog-outer { width:100%; height:6px; background:rgba(255,255,255,.07); border-radius:3px; overflow:hidden; }
-.s5-prog-inner {
-  height:100%; border-radius:3px;
-  background:linear-gradient(90deg,var(--purple-dk),var(--purple-lt));
-  box-shadow:0 0 8px var(--purple-glow);
-  width:0%; transition:width 1.1s var(--ease-out) .5s;
-}
-.s5-prog-labels { display:flex; justify-content:space-between; margin-top:5px; }
-.s5-prog-txt { font-size:10px; color:var(--text-muted); }
+.card-cta:active{transform:scale(.97);box-shadow:0 3px 12px var(--purple-glow);}
+.card-cta i{font-size:18px;}
 
-/* XP burst */
-.s5-xp-row {
-  width:100%; display:flex; gap:10px; margin-bottom:20px;
+/* ─────────────────────────────────────────────────────────────
+   PRIMARY CTA ZONE
+───────────────────────────────────────────────────────────── */
+.cta-zone{
+  padding:18px 24px 36px;
+  display:flex;flex-direction:column;gap:12px;
+  position:relative;z-index:2;
 }
-.s5-xp-card {
-  flex:1; border-radius:14px; padding:12px;
-  display:flex; flex-direction:column; align-items:center; gap:4px;
+.btn-start{
+  width:100%;border:none;border-radius:18px;
+  padding:18px 24px;cursor:pointer;
+  font-family:'Poppins',sans-serif;
+  font-size:17px;font-weight:800;color:#fff;
+  background:linear-gradient(135deg,var(--purple-dk),var(--purple),var(--purple-lt));
+  box-shadow:0 8px 36px var(--purple-glow);
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  position:relative;overflow:hidden;
+  animation:ctaGlow 2.8s ease-in-out infinite;
+  transition:transform .15s ease;
+  letter-spacing:.01em;
 }
-.s5-xp-card-g { background:var(--gold-dim); border:1px solid rgba(251,191,36,.18); }
-.s5-xp-card-p { background:var(--purple-dim); border:1px solid rgba(124,58,237,.2); }
-.s5-xp-ico { font-size:22px; }
-.s5-xp-num-g { font-size:18px; font-weight:900; color:var(--gold); }
-.s5-xp-num-p { font-size:18px; font-weight:900; color:var(--purple-lt); }
-.s5-xp-lbl { font-size:10px; color:var(--text-muted); text-align:center; }
+.btn-start::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,transparent 50%);
+  pointer-events:none;
+}
+.btn-start:active{transform:scale(.97);}
+.btn-start i{font-size:22px;}
 
-/* ──────────────────────────────────────────────────────────
-   NAV DOTS + RESTART
-────────────────────────────────────────────────────────── */
-.nav-row { display:flex; flex-direction:column; align-items:center; gap:10px; }
-.nav-dots { display:flex; align-items:center; gap:6px; }
-.dot {
-  width:6px; height:6px; border-radius:3px;
-  background:rgba(255,255,255,.14); cursor:pointer;
-  transition:background .3s, width .3s;
+.btn-explore{
+  width:100%;border:none;
+  background:transparent;
+  font-family:'Poppins',sans-serif;
+  font-size:14px;font-weight:600;color:var(--text-muted);
+  cursor:pointer;padding:8px;
+  transition:color .2s;
 }
-.dot.on { background:var(--purple-lt); width:18px; }
+.btn-explore:hover,.btn-explore:active{color:var(--text-sec);}
 
-.restart-btn {
-  background:transparent; color:rgba(255,255,255,.28);
-  font-family:'Poppins',sans-serif; font-size:12px; font-weight:500;
-  border:1px solid rgba(255,255,255,.07); border-radius:10px;
-  padding:8px 16px; cursor:pointer;
-  display:flex; align-items:center; gap:6px;
-  transition:color .2s, border-color .2s;
+/* ─────────────────────────────────────────────────────────────
+   RESTART
+───────────────────────────────────────────────────────────── */
+.restart-btn{
+  background:transparent;color:rgba(255,255,255,.25);
+  font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;
+  border:1px solid rgba(255,255,255,.07);border-radius:10px;
+  padding:8px 16px;cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+  transition:color .2s,border-color .2s;
 }
-.restart-btn:hover { color:rgba(255,255,255,.6); border-color:rgba(255,255,255,.18); }
+.restart-btn:hover{color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.16);}
 </style>
 </head>
 <body>
 
-<!-- Floating reward popup (absolutely positioned inside .phone) -->
-<div class="reward-popup" id="rewardPopup">+€0.05 unlocked ✨</div>
+<!-- SVG Gradient Defs -->
+<svg width="0" height="0" style="position:absolute;pointer-events:none;">
+  <defs>
+    <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#7C3AED"/>
+      <stop offset="50%"  stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+  </defs>
+</svg>
 
 <div class="wrap">
   <div class="phone" id="phone">
     <div class="notch"></div>
+
+    <!-- Canvas layers -->
+    <canvas id="confettiCanvas"></canvas>
+    <canvas id="coinCanvas"></canvas>
 
     <div class="status-bar">
       <span class="st-time">9:41</span>
@@ -761,597 +622,189 @@ body::before {
       </div>
     </div>
 
-    <div class="screens">
+    <div class="scroll">
 
-      <!-- ═══════════════════════════════════════════
-           SCREEN 1 — TRUST + PATH PREVIEW
-           ═══════════════════════════════════════════ -->
-      <div class="screen" id="s1">
-        <div class="s1-blob-a"></div>
-        <div class="s1-blob-b"></div>
+      <!-- ═══════════════ CELEBRATION ZONE ═══════════════ -->
+      <div class="celebration-zone">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-green"></div>
 
-        <div class="s1-inner">
-
-          <!-- live ticker -->
-          <div class="s1-ticker">
-            <div class="ticker-pill">
-              <div class="live-dot"></div>
-              <span class="ticker-lbl">Paid today&nbsp;</span>
-              <span class="ticker-num" id="tickerNum">€0</span>
-            </div>
+        <div class="ring-wrap anim" id="ringWrap">
+          <svg class="ring-svg" viewBox="0 0 164 164">
+            <circle class="ring-bg"    cx="82" cy="82" r="65"/>
+            <circle class="ring-track" cx="82" cy="82" r="65"/>
+            <circle class="ring-fill"  cx="82" cy="82" r="65" id="ringFill"/>
+          </svg>
+          <div class="ring-center">
+            <div class="ring-amt" id="ringAmt">$0</div>
+            <div class="ring-goal">/ $5.00</div>
           </div>
-
-          <!-- headline -->
-          <div class="s1-headline">
-            Earn <span class="gr">real rewards</span><br>by playing games
-          </div>
-
-          <!-- stats -->
-          <div class="s1-stats">
-            <div class="s1-stat">
-              <div class="s1-stat-num green">1.2M+</div>
-              <div class="s1-stat-lbl">Active Earners</div>
-            </div>
-            <div class="s1-stat">
-              <div class="s1-stat-num gold">€8.4M</div>
-              <div class="s1-stat-lbl">Total Paid Out</div>
-            </div>
-            <div class="s1-stat">
-              <div class="s1-stat-num purple">4.7★</div>
-              <div class="s1-stat-lbl">App Rating</div>
-            </div>
-          </div>
-
-          <!-- social proof avatars -->
-          <div class="s1-social">
-            <div class="av-stack">
-              <div class="av av1">🧑</div>
-              <div class="av av2">👩</div>
-              <div class="av av3">👨</div>
-              <div class="av av4">🧑</div>
-            </div>
-            <div class="social-txt">
-              <strong>Marco just earned €47.20</strong>
-              Join 1.2M+ earners worldwide
-            </div>
-          </div>
-
-          <!-- onboarding checklist -->
-          <div class="s1-checklist">
-            <div class="checklist-title">
-              <i class="ti ti-map"></i> Your Earning Journey
-            </div>
-
-            <div class="cl-step done">
-              <div class="cl-dot done"><i class="ti ti-check"></i></div>
-              <div class="cl-label">Create account</div>
-            </div>
-            <div class="cl-step current">
-              <div class="cl-dot current"></div>
-              <div class="cl-label">Personalize rewards</div>
-            </div>
-            <div class="cl-step">
-              <div class="cl-dot">3</div>
-              <div class="cl-label">Complete first task</div>
-            </div>
-            <div class="cl-step">
-              <div class="cl-dot">4</div>
-              <div class="cl-label">Cash out</div>
-            </div>
-          </div>
-
-          <!-- CTA -->
-          <button class="btn btn-primary" id="s1Cta">
-            Start Earning <i class="ti ti-arrow-right"></i>
-          </button>
-
-          <div class="s1-trust">
-            <div class="trust-item"><i class="ti ti-shield-check"></i>Secure</div>
-            <div class="trust-item"><i class="ti ti-bolt"></i>Instant payouts</div>
-            <div class="trust-item"><i class="ti ti-gift"></i>Free to join</div>
+          <div class="ring-badge" id="ringBadge">
+            <i class="ti ti-circle-check-filled"></i> Goal Completed
           </div>
         </div>
-      </div><!-- /s1 -->
+      </div>
 
+      <!-- ═══════════════ HEADLINE ZONE ═══════════════ -->
+      <div class="headline-zone">
+        <div class="headline anim">
+          You reached your<br>
+          <span class="grad">first $5</span> 🎉
+        </div>
+        <div class="subheadline anim">
+          Your bonus has been unlocked. Now start earning even bigger rewards by completing your first game.
+        </div>
+        <div class="trust-row anim">
+          <div class="trust-pill green">
+            <i class="ti ti-bolt"></i> Fast payouts
+          </div>
+          <div class="trust-pill gold">
+            <i class="ti ti-users"></i> Trusted by millions
+          </div>
+          <div class="trust-pill purple">
+            <i class="ti ti-clock"></i> ~10 min avg
+          </div>
+        </div>
+      </div>
 
-      <!-- ═══════════════════════════════════════════
-           SCREEN 2 — PERSONALIZATION Q1
-           ═══════════════════════════════════════════ -->
-      <div class="screen" id="s2">
-        <div class="hdr">
-          <button class="back-btn" data-to="1"><i class="ti ti-arrow-left"></i></button>
-          <span class="step-lbl">Profile · 1 of 2</span>
-          <div class="spacer"></div>
+      <!-- ═══════════════ PROGRESSION ═══════════════ -->
+      <div class="progression anim">
+        <div class="prog-header">
+          <i class="ti ti-map"></i> Your earning journey
+        </div>
+        <div class="prog-track">
+
+          <div class="prog-step done">
+            <div class="prog-dot done"><i class="ti ti-check"></i></div>
+            <div class="prog-info">
+              <div class="prog-label">Onboarding<br>Bonus</div>
+              <div class="prog-value green">$5.00 ✓</div>
+            </div>
+          </div>
+
+          <div class="prog-line done active"></div>
+
+          <div class="prog-step current">
+            <div class="prog-dot current">2</div>
+            <div class="prog-info">
+              <div class="prog-label">First<br>Game</div>
+              <div class="prog-value gold">+$7.00</div>
+            </div>
+          </div>
+
+          <div class="prog-line"></div>
+
+          <div class="prog-step upcoming">
+            <div class="prog-dot upcoming">3</div>
+            <div class="prog-info">
+              <div class="prog-label">First<br>Cashout</div>
+              <div class="prog-value muted">$12+</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══════════════ GAME CARD ═══════════════ -->
+      <div class="game-card-wrap anim">
+        <div class="rec-label">
+          <i class="ti ti-star-filled"></i> Recommended for you
         </div>
 
-        <div class="q-inner">
-
-          <!-- step bar -->
-          <div class="q-step-row">
-            <div class="q-step-pip active"></div>
-            <div class="q-step-pip upcoming"></div>
-          </div>
-
-          <!-- balance earned -->
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-            <div>
-              <div class="q-headline">What do you want<br>to earn for?</div>
-              <div class="q-sub">We'll match offers to your goal.</div>
+        <div class="game-card">
+          <div class="game-card-top">
+            <div class="game-artwork">
+              🏰
+              <div class="game-artwork-detail"></div>
             </div>
-            <div class="bal-pill" id="s2Bal">
-              <i class="ti ti-coin"></i> €0.00
+            <div class="game-info-col">
+              <div class="game-name">Dragon Throne</div>
+              <div class="game-genre">RPG Strategy · iOS &amp; Android</div>
+              <div class="game-tags">
+                <span class="g-tag g-tag-easy">Easy</span>
+                <span class="g-tag g-tag-fast">⚡ Fast Payout</span>
+              </div>
             </div>
           </div>
 
-          <!-- options -->
-          <div class="opt-list" id="s2Opts">
-            <div class="opt-card" data-val="cash">
-              <div class="opt-icon">💰</div>
-              <div class="opt-text">
-                <div class="opt-name">Cash (PayPal)</div>
-                <div class="opt-desc">Withdraw directly to your PayPal</div>
-              </div>
-              <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+          <div class="game-reward-row">
+            <div class="reward-col">
+              <div class="reward-lbl">Your reward</div>
+              <div class="reward-amt"><span>+</span>$7.00</div>
             </div>
-            <div class="opt-card" data-val="gaming">
-              <div class="opt-icon">🎮</div>
-              <div class="opt-text">
-                <div class="opt-name">Gaming</div>
-                <div class="opt-desc">In-game items, Robux, V-Bucks</div>
+            <div class="game-meta-col">
+              <div class="meta-item">
+                <i class="ti ti-clock"></i> 10–15 min
               </div>
-              <div class="opt-radio"><div class="opt-radio-dot"></div></div>
-            </div>
-            <div class="opt-card" data-val="shopping">
-              <div class="opt-icon">🛍️</div>
-              <div class="opt-text">
-                <div class="opt-name">Shopping</div>
-                <div class="opt-desc">Amazon, eBay and more</div>
+              <div class="meta-item">
+                <i class="ti ti-shield-check"></i> Paid instantly
               </div>
-              <div class="opt-radio"><div class="opt-radio-dot"></div></div>
-            </div>
-            <div class="opt-card" data-val="crypto">
-              <div class="opt-icon">₿</div>
-              <div class="opt-text">
-                <div class="opt-name">Crypto</div>
-                <div class="opt-desc">Bitcoin, ETH, USDT</div>
+              <div class="meta-item">
+                <i class="ti ti-star-half-filled"></i> Easy difficulty
               </div>
-              <div class="opt-radio"><div class="opt-radio-dot"></div></div>
-            </div>
-            <div class="opt-card" data-val="giftcards">
-              <div class="opt-icon">🎁</div>
-              <div class="opt-text">
-                <div class="opt-name">Gift Cards</div>
-                <div class="opt-desc">Steam, Spotify, Netflix</div>
-              </div>
-              <div class="opt-radio"><div class="opt-radio-dot"></div></div>
             </div>
           </div>
 
-          <!-- reward feedback -->
-          <div class="reward-line" id="s2Reward">
-            <i class="ti ti-star-filled"></i>
-            <span><em>+€0.05</em> added to your balance for answering!</span>
+          <div class="card-cta-row">
+            <button class="card-cta" id="cardCta">
+              <i class="ti ti-player-play"></i> Start This Game
+            </button>
           </div>
-
-          <button class="btn btn-primary disabled" id="s2Cta">
-            Continue <i class="ti ti-arrow-right"></i>
-          </button>
         </div>
-      </div><!-- /s2 -->
+      </div>
 
+      <!-- ═══════════════ PRIMARY CTA ZONE ═══════════════ -->
+      <div class="cta-zone anim">
+        <button class="btn-start" id="btnStart">
+          <i class="ti ti-rocket"></i> Start First Game
+        </button>
+        <button class="btn-explore" id="btnExplore">
+          Explore More Offers
+        </button>
+      </div>
 
-      <!-- ═══════════════════════════════════════════
-           SCREEN 3 — PERSONALIZATION Q2
-           ═══════════════════════════════════════════ -->
-      <div class="screen" id="s3">
-        <div class="hdr">
-          <button class="back-btn" data-to="2"><i class="ti ti-arrow-left"></i></button>
-          <span class="step-lbl">Profile · 2 of 2</span>
-          <div class="spacer"></div>
-        </div>
-
-        <div class="q-inner">
-
-          <!-- step bar -->
-          <div class="q-step-row">
-            <div class="q-step-pip done"></div>
-            <div class="q-step-pip active"></div>
-          </div>
-
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-            <div>
-              <div class="q-headline">How often do you<br>play mobile games?</div>
-              <div class="q-sub">Helps us find your best-paying offers.</div>
-            </div>
-            <div class="bal-pill" id="s3Bal">
-              <i class="ti ti-coin"></i> €0.05
-            </div>
-          </div>
-
-          <div class="opt-list" id="s3Opts">
-            <div class="opt-card" data-val="daily">
-              <div class="opt-icon">⚡</div>
-              <div class="opt-text">
-                <div class="opt-name">Daily</div>
-                <div class="opt-desc">I play every day</div>
-              </div>
-              <div class="opt-radio"><div class="opt-radio-dot"></div></div>
-            </div>
-            <div class="opt-card" data-val="weekly">
-              <div class="opt-icon">📅</div>
-              <div class="opt-text">
-                <div class="opt-name">Weekly</div>
-                <div class="opt-desc">A few times per week</div>
-              </div>
-              <div class="opt-radio"><div class="opt-radio-dot"></div></div>
-            </div>
-            <div class="opt-card" data-val="rarely">
-              <div class="opt-icon">🎲</div>
-              <div class="opt-text">
-                <div class="opt-name">Rarely</div>
-                <div class="opt-desc">Occasionally when I have time</div>
-              </div>
-              <div class="opt-radio"><div class="opt-radio-dot"></div></div>
-            </div>
-            <div class="opt-card" data-val="never">
-              <div class="opt-icon">🚀</div>
-              <div class="opt-text">
-                <div class="opt-name">New to gaming</div>
-                <div class="opt-desc">Happy to start!</div>
-              </div>
-              <div class="opt-radio"><div class="opt-radio-dot"></div></div>
-            </div>
-          </div>
-
-          <div class="reward-line" id="s3Reward">
-            <i class="ti ti-star-filled"></i>
-            <span><em>+€0.05</em> added — you're on a roll!</span>
-          </div>
-
-          <button class="btn btn-primary disabled" id="s3Cta">
-            See My First Reward <i class="ti ti-arrow-right"></i>
-          </button>
-        </div>
-      </div><!-- /s3 -->
-
-
-      <!-- ═══════════════════════════════════════════
-           SCREEN 4 — FIRST TASK SELECTION
-           ═══════════════════════════════════════════ -->
-      <div class="screen" id="s4">
-        <div class="hdr">
-          <button class="back-btn" data-to="3"><i class="ti ti-arrow-left"></i></button>
-          <span class="step-lbl">Step 3 of 4</span>
-          <div class="spacer"></div>
-        </div>
-        <div style="padding:0 22px 36px;">
-
-          <!-- €0 → €5 progress bar -->
-          <div class="goal-bar-wrap">
-            <div class="goal-bar-top">
-              <div class="goal-bar-lbl">
-                <div class="live-dot" style="width:6px;height:6px;"></div>
-                Progress to cashout
-              </div>
-              <div class="goal-bar-amt">€0.10 <span style="color:var(--text-muted);font-weight:500;">/ €5.00</span></div>
-            </div>
-            <div class="goal-bar-outer">
-              <div class="goal-bar-inner" id="s4GoalBar" style="width:2%"></div>
-            </div>
-            <div class="goal-bar-labels">
-              <div class="goal-bar-txt">€0.10 earned</div>
-              <div class="goal-bar-txt">€5.00 goal</div>
-            </div>
-          </div>
-
-          <div class="s4-headline">Your first reward<br>is ready 🎯</div>
-          <div class="s4-sub">
-            <i class="ti ti-clock"></i>
-            Most users earn €1–€2 within just <strong>10 minutes</strong>
-          </div>
-
-          <!-- offer card -->
-          <div class="offer-card">
-            <div class="offer-top">
-              <div class="offer-thumb">⚔️</div>
-              <div class="offer-info">
-                <div class="offer-tags">
-                  <span class="tag tag-easy">Easy</span>
-                  <span class="tag tag-fast">⚡ Fast Payout</span>
-                  <span class="tag tag-top">🔥 Top Pick</span>
-                </div>
-                <div class="offer-name">Arena Warriors</div>
-                <div class="offer-task">Reach Arena 5 to unlock reward</div>
-              </div>
-            </div>
-            <div class="offer-reward-row">
-              <div class="offer-payout">
-                <div class="offer-payout-lbl">You Earn</div>
-                <div class="offer-payout-amt">€1.50</div>
-              </div>
-              <div class="offer-meta">
-                <div class="offer-meta-row">
-                  <i class="ti ti-clock"></i> 5–10 min
-                </div>
-                <div class="offer-meta-row">
-                  <i class="ti ti-star-half-filled"></i> Easy difficulty
-                </div>
-                <div class="offer-meta-row">
-                  <i class="ti ti-bolt"></i> Paid instantly
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- view more -->
-          <div class="view-more" id="viewMore">
-            <i class="ti ti-layout-grid"></i>
-            <span>View more offers</span>
-            <i class="ti ti-chevron-right" style="margin-left:auto;"></i>
-          </div>
-
-          <button class="btn btn-primary" id="s4Cta">
-            Start First Task <i class="ti ti-arrow-right"></i>
-          </button>
-        </div>
-      </div><!-- /s4 -->
-
-
-      <!-- ═══════════════════════════════════════════
-           SCREEN 5 — CELEBRATION
-           ═══════════════════════════════════════════ -->
-      <div class="screen" id="s5">
-        <canvas id="s5Canvas"></canvas>
-        <div class="s5-inner">
-          <div class="hdr" style="width:100%;">
-            <div class="spacer"></div>
-            <span class="step-lbl">Step 4 of 4</span>
-            <div class="spacer"></div>
-          </div>
-
-          <div class="s5-glow-ring">
-            <div class="s5-coin">🪙</div>
-          </div>
-
-          <div class="s5-earned-lbl">You earned</div>
-          <div class="s5-earned-amt">€1.50</div>
-          <div class="s5-sub">
-            You're <strong>30% closer</strong> to your first cashout — keep going!
-          </div>
-
-          <!-- cashout progress -->
-          <div class="s5-progress" style="width:100%;">
-            <div class="s5-prog-hdr">
-              <div class="s5-prog-lbl">
-                <i class="ti ti-star-filled"></i> Cashout Progress
-              </div>
-              <div class="s5-prog-pct">32%</div>
-            </div>
-            <div class="s5-prog-outer">
-              <div class="s5-prog-inner" id="s5ProgBar"></div>
-            </div>
-            <div class="s5-prog-labels">
-              <div class="s5-prog-txt">€1.60 earned</div>
-              <div class="s5-prog-txt">€5.00 goal</div>
-            </div>
-          </div>
-
-          <!-- XP + streak -->
-          <div class="s5-xp-row">
-            <div class="s5-xp-card s5-xp-card-g">
-              <div class="s5-xp-ico">🔥</div>
-              <div class="s5-xp-num-g">+150</div>
-              <div class="s5-xp-lbl">XP Gained</div>
-            </div>
-            <div class="s5-xp-card s5-xp-card-p">
-              <div class="s5-xp-ico">⭐</div>
-              <div class="s5-xp-num-p">Level 2</div>
-              <div class="s5-xp-lbl">Leveled Up!</div>
-            </div>
-          </div>
-
-          <button class="btn btn-primary" id="s5Cta" style="width:100%;">
-            Keep Earning <i class="ti ti-arrow-right"></i>
-          </button>
-        </div>
-      </div><!-- /s5 -->
-
-    </div><!-- /screens -->
+    </div><!-- /scroll -->
   </div><!-- /phone -->
 
-  <!-- nav dots -->
-  <div class="nav-row">
-    <div class="nav-dots" id="navDots"></div>
-    <button class="restart-btn" id="restartBtn">
-      <i class="ti ti-refresh"></i> Restart
-    </button>
-  </div>
+  <button class="restart-btn" id="restartBtn">
+    <i class="ti ti-refresh"></i> Replay
+  </button>
 </div>
 
 <script>
-/* ═══════════════════════════════════════════════════════
-   STATE
-═══════════════════════════════════════════════════════ */
-const TOTAL = 5;
-let cur = 1;
-
-const state = {
-  q1: null,   // selected value on s2
-  q2: null,   // selected value on s3
-  bal: 0,     // cents
-  q1Rewarded: false,
-  q2Rewarded: false,
-};
-
-/* ═══════════════════════════════════════════════════════
-   NAVIGATION
-═══════════════════════════════════════════════════════ */
-function goTo(n) {
-  if (n === cur) return;
-  const prev = document.getElementById('s' + cur);
-  const next = document.getElementById('s' + n);
-  prev.classList.remove('active');
-  prev.classList.add('out-left');
-  next.classList.add('active');
-  cur = n;
-  updateDots();
-  setTimeout(() => prev.classList.remove('out-left'), 500);
-  onEnter(n);
-}
-
-function updateDots() {
-  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('on', i + 1 === cur));
-}
-
-function onEnter(n) {
-  if (n === 1) initS1();
-  if (n === 4) initS4();
-  if (n === 5) initS5();
-}
-
-/* ═══════════════════════════════════════════════════════
-   COUNTER ANIMATION
-═══════════════════════════════════════════════════════ */
-function animCount(el, from, to, dur, fmt) {
-  if (!el) return;
-  const s = performance.now();
-  const run = now => {
-    const t = Math.min((now - s) / dur, 1);
-    const e = 1 - Math.pow(1 - t, 3);
-    el.textContent = fmt(Math.floor(from + e * (to - from)));
-    if (t < 1) requestAnimationFrame(run);
-  };
-  requestAnimationFrame(run);
-}
-
-/* ═══════════════════════════════════════════════════════
-   SCREEN 1
-═══════════════════════════════════════════════════════ */
-function initS1() {
-  animCount(
-    document.getElementById('tickerNum'),
-    92000, 124830, 2200,
-    v => '€' + v.toLocaleString('en-US')
-  );
-}
-
-/* ═══════════════════════════════════════════════════════
-   REWARD POPUP
-═══════════════════════════════════════════════════════ */
-function showRewardPopup(targetEl, text) {
-  const popup = document.getElementById('rewardPopup');
-  const rect  = targetEl.getBoundingClientRect();
-  popup.textContent = text;
-  popup.style.left = (rect.left + rect.width / 2) + 'px';
-  popup.style.top  = rect.top + 'px';
-  popup.classList.remove('fly');
-  // Force reflow
-  void popup.offsetWidth;
-  popup.classList.add('fly');
-}
-
-/* ═══════════════════════════════════════════════════════
-   PERSONALIZATION OPTION LOGIC
-═══════════════════════════════════════════════════════ */
-function initOpts(listId, stateKey, rewardId, ctaId, balId, nextScreen) {
-  const opts = document.querySelectorAll('#' + listId + ' .opt-card');
-  opts.forEach(card => {
-    card.addEventListener('click', () => {
-      // Select
-      opts.forEach(c => c.classList.remove('sel'));
-      card.classList.add('sel');
-      state[stateKey] = card.dataset.val;
-
-      // Enable CTA
-      const cta = document.getElementById(ctaId);
-      cta.classList.remove('disabled');
-
-      // Reward (once per question)
-      if (!state[stateKey + 'Rewarded']) {
-        state[stateKey + 'Rewarded'] = true;
-        state.bal += 5; // +€0.05
-
-        // Show floating popup
-        showRewardPopup(card, '+€0.05 unlocked ✨');
-
-        // Show inline reward line
-        const rewLine = document.getElementById(rewardId);
-        setTimeout(() => rewLine.classList.add('show'), 200);
-
-        // Update balance pill
-        updateBalPill(balId, state.bal);
-        // Also update s3 pill if we're on s2
-        if (balId === 's2Bal') updateBalPill('s3Bal', state.bal);
-      }
-    });
-  });
-
-  document.getElementById(ctaId).addEventListener('click', () => {
-    if (!state[stateKey]) return;
-    goTo(nextScreen);
-  });
-}
-
-function updateBalPill(id, cents) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.innerHTML = `<i class="ti ti-coin"></i> €${(cents / 100).toFixed(2)}`;
-}
-
-/* ═══════════════════════════════════════════════════════
-   SCREEN 4 INIT
-═══════════════════════════════════════════════════════ */
-function initS4() {
-  setTimeout(() => {
-    const bar = document.getElementById('s4GoalBar');
-    if (bar) bar.style.width = '2%'; // €0.10 of €5 = 2%
-  }, 300);
-}
-
-/* ═══════════════════════════════════════════════════════
-   SCREEN 5 — CELEBRATION + CONFETTI
-═══════════════════════════════════════════════════════ */
-function initS5() {
-  // Progress bar to 32%
-  setTimeout(() => {
-    const bar = document.getElementById('s5ProgBar');
-    if (bar) bar.style.width = '32%';
-  }, 500);
-
-  launchConfetti();
-}
-
+/* ═══════════════════════════════════════════════════
+   CONFETTI — one-time burst on load
+═══════════════════════════════════════════════════ */
 function launchConfetti() {
-  const canvas = document.getElementById('s5Canvas');
-  if (!canvas) return;
+  const canvas = document.getElementById('confettiCanvas');
+  const phone  = document.getElementById('phone');
+  canvas.width  = phone.clientWidth  || 390;
+  canvas.height = phone.clientHeight || 844;
   const ctx = canvas.getContext('2d');
-  canvas.width = 390;
-  canvas.height = 844;
 
   const COLORS = ['#7C3AED','#A78BFA','#34D399','#FBBF24','#F472B6','#60A5FA','#FFFFFF','#FB923C'];
 
-  const parts = Array.from({ length: 120 }, () => {
-    const rect = Math.random() > .36;
+  const parts = Array.from({ length: 130 }, () => {
+    const rect = Math.random() > .34;
     return {
-      x: 195 + (Math.random() - .5) * 90,
-      y: 230,
-      vx: (Math.random() - .5) * 13,
-      vy: -(Math.random() * 16 + 5),
-      g: .32,
+      x:  150 + (Math.random() - .5) * 100,
+      y:  180,
+      vx: (Math.random() - .5) * 14,
+      vy: -(Math.random() * 17 + 5),
+      g:  .34,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      al: 1,
-      fade: .005 + Math.random() * .01,
+      al: 1, fade: .0045 + Math.random() * .009,
       rect,
-      sz: rect ? null : (Math.random() * 6 + 3),
-      w: rect ? (Math.random() * 11 + 5) : null,
-      h: rect ? (Math.random() * 5 + 3) : null,
+      sz: rect ? null : (Math.random() * 5.5 + 2.5),
+      w:  rect ? (Math.random() * 12 + 5) : null,
+      h:  rect ? (Math.random() * 5  + 3) : null,
       rot: Math.random() * Math.PI * 2,
-      rs: (Math.random() - .5) * .22,
+      rs:  (Math.random() - .5) * .22,
     };
   });
 
   const draw = () => {
-    ctx.clearRect(0, 0, 390, 844);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     let alive = false;
     for (const p of parts) {
       if (p.al <= 0) continue;
@@ -1363,63 +816,144 @@ function launchConfetti() {
       ctx.fillStyle = p.color;
       ctx.translate(p.x, p.y);
       ctx.rotate(p.rot);
-      if (p.rect) ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
-      else { ctx.beginPath(); ctx.arc(0, 0, p.sz, 0, Math.PI*2); ctx.fill(); }
+      if (p.rect) ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      else { ctx.beginPath(); ctx.arc(0, 0, p.sz, 0, Math.PI * 2); ctx.fill(); }
       ctx.restore();
     }
     if (alive) requestAnimationFrame(draw);
-    else ctx.clearRect(0, 0, 390, 844);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
   requestAnimationFrame(draw);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════
+   AMBIENT COIN PARTICLES — continuous drift
+═══════════════════════════════════════════════════ */
+function launchCoinParticles() {
+  const canvas = document.getElementById('coinCanvas');
+  const phone  = document.getElementById('phone');
+  canvas.width  = phone.clientWidth  || 390;
+  canvas.height = phone.clientHeight || 844;
+  const ctx = canvas.getContext('2d');
+
+  const COIN_COLORS = [
+    'rgba(251,191,36,',
+    'rgba(253,224,71,',
+    'rgba(167,139,250,',
+    'rgba(52,211,153,',
+  ];
+
+  const coins = Array.from({ length: 18 }, () => ({
+    x:  Math.random() * 390,
+    y:  Math.random() * 300 + 80,
+    vx: (Math.random() - .5) * .35,
+    vy: -(Math.random() * .55 + .15),
+    sz: Math.random() * 5 + 3,
+    al: Math.random() * .35 + .1,
+    dAl: (Math.random() - .5) * .006,
+    color: COIN_COLORS[Math.floor(Math.random() * COIN_COLORS.length)],
+  }));
+
+  const draw = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const c of coins) {
+      c.x  += c.vx;
+      c.y  += c.vy;
+      c.al += c.dAl;
+      if (c.al < .05 || c.al > .45) c.dAl *= -1;
+      if (c.y < -10) { c.y = canvas.height + 10; c.x = Math.random() * 390; }
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, c.al);
+      // Draw coin as circle with subtle inner highlight
+      const grd = ctx.createRadialGradient(c.x - c.sz * .35, c.y - c.sz * .35, 0, c.x, c.y, c.sz);
+      grd.addColorStop(0, c.color + '.9)');
+      grd.addColorStop(1, c.color + '.3)');
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, c.sz, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+    requestAnimationFrame(draw);
+  };
+  requestAnimationFrame(draw);
+}
+
+/* ═══════════════════════════════════════════════════
+   RING ANIMATION + COUNTER
+═══════════════════════════════════════════════════ */
+function animateRing() {
+  const ring   = document.getElementById('ringFill');
+  const amtEl  = document.getElementById('ringAmt');
+  const badge  = document.getElementById('ringBadge');
+  const CIRCUM = 408.41; // 2 * π * 65
+
+  // Animate stroke: fill from 0 → full
+  ring.style.strokeDashoffset = CIRCUM;
+  setTimeout(() => {
+    ring.style.strokeDashoffset = '0';
+    ring.classList.add('complete');
+  }, 50);
+
+  // Balance counter $0 → $5
+  const dur   = 1400;
+  const start = performance.now();
+  const tick  = now => {
+    const t = Math.min((now - start) / dur, 1);
+    const e = 1 - Math.pow(1 - t, 3);
+    const v = e * 5;
+    amtEl.textContent = '$' + v.toFixed(2);
+    if (t < 1) requestAnimationFrame(tick);
+    else {
+      amtEl.textContent = '$5.00';
+      amtEl.style.animation = 'countPop .35s var(--spring) both';
+      // Show "Goal Completed" badge
+      setTimeout(() => badge.classList.add('show'), 200);
+    }
+  };
+  requestAnimationFrame(tick);
+}
+
+/* ═══════════════════════════════════════════════════
+   SEQUENTIAL REVEAL
+═══════════════════════════════════════════════════ */
+function revealItems() {
+  const items = document.querySelectorAll('.anim');
+  items.forEach((el, i) => {
+    setTimeout(() => {
+      el.style.animationDelay = '0ms';
+      el.classList.add('in');
+    }, 500 + i * 160);
+  });
+}
+
+/* ═══════════════════════════════════════════════════
    INIT
-═══════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  // Nav dots
-  const dotsEl = document.getElementById('navDots');
-  for (let i = 1; i <= TOTAL; i++) {
-    const d = document.createElement('div');
-    d.className = 'dot' + (i === 1 ? ' on' : '');
-    d.title = 'Screen ' + i;
-    d.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(d);
-  }
+  // Kick off animations in sequence
+  setTimeout(launchConfetti,   100);
+  setTimeout(launchCoinParticles, 200);
+  setTimeout(animateRing,      220);
+  revealItems();
 
-  // Show s1
-  document.getElementById('s1').classList.add('active');
-  initS1();
-
-  // S1 CTA
-  document.getElementById('s1Cta').addEventListener('click', () => goTo(2));
-
-  // Personalization wiring
-  initOpts('s2Opts', 'q1', 's2Reward', 's2Cta', 's2Bal', 3);
-  initOpts('s3Opts', 'q2', 's3Reward', 's3Cta', 's3Bal', 4);
-
-  // Mark q1/q2 rewarded flags as the prop names initOpts uses
-  // Note: initOpts checks state[stateKey + 'Rewarded'], so 'q1Rewarded' and 'q2Rewarded'
-
-  // Back buttons
-  document.querySelectorAll('.back-btn[data-to]').forEach(btn => {
-    btn.addEventListener('click', () => goTo(parseInt(btn.dataset.to)));
+  // Button interactions (prototype — just bounce feedback)
+  ['btnStart','cardCta'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      btn.style.transform = 'scale(.97)';
+      setTimeout(() => btn.style.transform = '', 150);
+    });
   });
 
-  // S4 CTA
-  document.getElementById('s4Cta').addEventListener('click', () => goTo(5));
-  document.getElementById('viewMore').addEventListener('click', () => {
-    // Subtle feedback — in prototype, just bounce the card
-    const vm = document.getElementById('viewMore');
-    vm.style.transition = 'transform .15s var(--spring)';
-    vm.style.transform = 'scale(.97)';
-    setTimeout(() => vm.style.transform = '', 200);
+  document.getElementById('btnExplore').addEventListener('click', () => {
+    const b = document.getElementById('btnExplore');
+    b.style.opacity = '.5';
+    setTimeout(() => b.style.opacity = '', 200);
   });
 
-  // S5 CTA — loop back to s4 for prototype
-  document.getElementById('s5Cta').addEventListener('click', () => goTo(4));
-
-  // Restart
   document.getElementById('restartBtn').addEventListener('click', () => location.reload());
 });
 </script>
