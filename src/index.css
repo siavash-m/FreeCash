@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+/* box-sizing reset — safe because box-sizing isn't a Tailwind utility */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #141523;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Poppins weight utilities */
+@utility poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+}
+@utility poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+}
+@utility poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+@utility poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+@utility poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+}
+@utility poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
