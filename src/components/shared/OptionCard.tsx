@@ -38,13 +38,21 @@ export default function OptionCard({ option, selected, previouslySelected, disab
       }}
     >
       <div className="flex flex-1 flex-col gap-[10px] items-start justify-center min-w-0">
-        {/* icon */}
+        {/* icon — normalise colour across all SVGs:
+            unselected → invert to white, then dim to match #a9a9ca grey
+            selected   → convert to dark (#141523) to sit on green bg */}
         <div className="relative shrink-0" style={{ width: 24, height: 24 }}>
           <img
             alt={option.iconAlt}
             src={option.icon}
             className="absolute block inset-0 max-w-none"
-            style={{ width: '100%', height: '100%' }}
+            style={{
+              width: '100%',
+              height: '100%',
+              filter: selected
+                ? 'brightness(0) opacity(0.75)'
+                : 'brightness(0) invert(1) opacity(0.6)',
+            }}
           />
         </div>
         {/* label + title */}

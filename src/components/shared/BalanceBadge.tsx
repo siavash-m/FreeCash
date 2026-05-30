@@ -5,9 +5,10 @@ export default function BalanceBadge({ balance }: { balance: string }) {
         className="flex gap-[8px] items-center pl-[14px] pr-[20px] py-[4px] rounded-[40px]"
         style={{ background: '#00403c', filter: 'drop-shadow(0px 4px 2px rgba(0,0,0,0.25))' }}
       >
+        {/* Icon: square viewBox → render square to avoid stretch */}
         <div className="flex h-[34px] items-center justify-center w-[43px]">
           <div style={{ transform: 'rotate(10.03deg)' }}>
-            <img alt="" src="/assets/balance-badge.svg" style={{ width: 38.8, height: 27.6, display: 'block' }} />
+            <img alt="" src="/assets/balance-badge.svg" style={{ width: 32, height: 32, display: 'block' }} />
           </div>
         </div>
         <div className="flex flex-col items-start justify-center" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900 }}>

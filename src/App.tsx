@@ -11,7 +11,6 @@ export default function App() {
   const [screen, setScreen]             = useState<Screen>('hook');
   const [questionIndex, setQuestionIndex] = useState(0);
   const [history, setHistory]           = useState<StepStatus[]>(() => questions.map(() => null));
-  // Stores the option id the user picked on each question (null if not yet answered / skipped)
   const [selections, setSelections]     = useState<(string | null)[]>(() => questions.map(() => null));
   const [isGoingBack, setIsGoingBack]   = useState(false);
 
