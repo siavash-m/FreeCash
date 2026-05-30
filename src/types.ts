@@ -6,11 +6,12 @@ export interface Option {
   title: string;
 }
 
+export type ProgressStep = 'glow' | 'skip' | 'partial' | 'empty';
+
 export interface Question {
   title: string;
   subtitle: string;
   balance: string;
-  progress: ('glow' | 'partial' | 'empty')[];
   showBack: boolean;
   options: Option[];
 }
