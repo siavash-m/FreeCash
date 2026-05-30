@@ -42,27 +42,25 @@ export const questions: Question[] = [
 /**
  * Progress bar — 5 segments: [intro₀, intro₁, Q1, Q2, Q3]
  *
- * Forward path (isGoingBack=false):
- *   partial = questionIndex + 2
- *   bars before partial → glow or skip based on history
+ * Bar → step mapping (1-indexed):
+ *   Q1 (index 0) → bar 2 → step 3   ← partial
+ *   Q2 (index 1) → bar 3 → step 4   ← partial
+ *   Q3 (index 2) → bar 4 → step 5   ← partial
  *
- * Back path (isGoingBack=true):
- *   partial shifts one step left = questionIndex + 1
- *   all bars before partial → glow (skip state hidden while revisiting)
+ * Direction has no effect on step position — Q2 always shows step 4
+ * whether reached forward or by pressing back.
+ * Bars before partial: glow (answered) or skip (skipped).
  */
 export function computeProgress(
   questionIndex: number,
-  history: ('answered' | 'skipped' | null)[],
-  isGoingBack = false
+  history: ('answered' | 'skipped' | null)[]
 ): ProgressStep[] {
-  const partialBar = isGoingBack ? questionIndex + 1 : questionIndex + 2;
+  const partialBar = questionIndex + 2; // Q1→2, Q2→3, Q3→4
 
   return [0, 1, 2, 3, 4].map((barIdx): ProgressStep => {
     if (barIdx === partialBar) return 'partial';
     if (barIdx > partialBar)  return 'empty';
-    // bars before partial
-    if (barIdx < 2)           return 'glow';  // intro always done
-    if (isGoingBack)          return 'glow';  // don't show skip state while going back
+    if (barIdx < 2)           return 'glow'; // intro always done
     const qi = barIdx - 2;
     return history[qi] === 'skipped' ? 'skip' : 'glow';
   });

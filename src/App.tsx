@@ -8,11 +8,11 @@ type Screen = 'hook' | 'questions' | 'finish';
 type StepStatus = 'answered' | 'skipped' | null;
 
 export default function App() {
-  const [screen, setScreen]             = useState<Screen>('hook');
+  const [screen, setScreen]               = useState<Screen>('hook');
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [history, setHistory]           = useState<StepStatus[]>(() => questions.map(() => null));
-  const [selections, setSelections]     = useState<(string | null)[]>(() => questions.map(() => null));
-  const [isGoingBack, setIsGoingBack]   = useState(false);
+  const [history, setHistory]             = useState<StepStatus[]>(() => questions.map(() => null));
+  const [selections, setSelections]       = useState<(string | null)[]>(() => questions.map(() => null));
+  const [isGoingBack, setIsGoingBack]     = useState(false);
 
   function recordStep(index: number, status: StepStatus, optionId: string | null = null) {
     setHistory((h) => h.map((v, i) => (i === index ? status : v)));
@@ -66,7 +66,7 @@ export default function App() {
     setIsGoingBack(false);
   }
 
-  const progress = computeProgress(questionIndex, history, isGoingBack);
+  const progress = computeProgress(questionIndex, history);
 
   return (
     <>
